@@ -28,25 +28,16 @@ class MainActivity : ComponentActivity() {
         viewModel.loadCharacter(1)
         setContent {
             FinalSpaceWikiTheme {
-
                 Scaffold(
                     modifier = Modifier.fillMaxSize()
                 ) {
-                    println("viewmodelstate: ${viewModel.characterDataState}")
                     viewModel.characterDataState.data?.let { data ->
-                        if(viewModel.characterDataState.error != null) {
-                            Text(text = viewModel.characterDataState.error.toString())
-                        }
-                        if(viewModel.characterDataState.isLoading) {
-                            Text(text = "XASAFDAf")
-                        }
                         Card(
                             backgroundColor = cardBackGroundColor,
                             shape = RoundedCornerShape(20.dp)
                         ) {
                             GlideImage(model = data.img_url, contentDescription = null)
                             Text(text = data.name )
-
                         }
                     }
                 }
