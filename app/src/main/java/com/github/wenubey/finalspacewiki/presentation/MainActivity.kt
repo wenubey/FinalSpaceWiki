@@ -28,7 +28,7 @@ class MainActivity : ComponentActivity() {
         viewModel.loadCharacter(1)
         setContent {
             FinalSpaceWikiTheme {
-                println("HAHAHAHAAHAHASHDFSLFJHAJSF")
+
                 Scaffold(
                     modifier = Modifier.fillMaxSize()
                 ) {
@@ -36,11 +36,9 @@ class MainActivity : ComponentActivity() {
                     viewModel.characterDataState.data?.let { data ->
                         if(viewModel.characterDataState.error != null) {
                             Text(text = viewModel.characterDataState.error.toString())
-                            println("error: ${viewModel.characterDataState.error.toString()}")
                         }
                         if(viewModel.characterDataState.isLoading) {
                             Text(text = "XASAFDAf")
-                            println("isloading: ${viewModel.characterDataState.isLoading}")
                         }
                         Card(
                             backgroundColor = cardBackGroundColor,
@@ -48,11 +46,9 @@ class MainActivity : ComponentActivity() {
                         ) {
                             GlideImage(model = data.img_url, contentDescription = null)
                             Text(text = data.name )
-                            println("name: ${data.name}")
 
                         }
                     }
-                    println("HAHAHAHAAHAHASHDFSLFJHAJSF")
                 }
             }
         }
