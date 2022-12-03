@@ -1,5 +1,6 @@
 package com.github.wenubey.finalspacewiki.presentation.ui.theme
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.Typography
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
@@ -15,11 +16,12 @@ val vt323 = FontFamily(
 
 // Set of Material typography styles to start with
 val Typography = Typography(
+
     body1 = TextStyle(
         fontFamily = vt323,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
-        color = Color.Black,
+        color = Color.White,
     )
     /* Other default text styles to override
     button = TextStyle(

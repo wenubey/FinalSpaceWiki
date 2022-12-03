@@ -33,6 +33,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+        freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
     }
     buildFeatures {
         compose true
@@ -79,4 +80,11 @@ dependencies {
 
     // Glide
     implementation "com.github.bumptech.glide:compose:1.0.0-alpha.1"
+
+    //accompanist for system's ui change
+    implementation "com.google.accompanist:accompanist-systemuicontroller:0.23.1"
+
+    //navigation
+    implementation "androidx.navigation:navigation-compose:$nav_version"
+
 }

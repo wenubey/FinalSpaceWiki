@@ -4,45 +4,32 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
-import com.bumptech.glide.integration.compose.GlideImage
+import androidx.compose.runtime.remember
+import androidx.navigation.NamedNavArgument
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.github.wenubey.finalspacewiki.presentation.ui.theme.FinalSpaceWikiTheme
-import com.github.wenubey.finalspacewiki.presentation.ui.theme.cardBackGroundColor
+import com.github.wenubey.finalspacewiki.presentation.wikidetail.WikiDetailScreen
+import com.github.wenubey.finalspacewiki.presentation.wikilist.WikiListScreen
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
     private val viewModel: WikiViewModel by viewModels()
-
-    @OptIn(ExperimentalGlideComposeApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.loadCharacter(1)
+        viewModel.loadCharactersList()
+
         setContent {
             FinalSpaceWikiTheme {
-                Scaffold(
-                    modifier = Modifier.fillMaxSize()
-                ) {
-                    viewModel.characterDataState.data?.let { data ->
-                        Card(
-                            backgroundColor = cardBackGroundColor,
-                            shape = RoundedCornerShape(20.dp)
-                        ) {
-                            GlideImage(model = data.img_url, contentDescription = null)
-                            Text(text = data.name )
-                        }
-                    }
-                }
+                Navigation(viewModel.listDataState, viewModel)
             }
         }
     }
 }
+
 

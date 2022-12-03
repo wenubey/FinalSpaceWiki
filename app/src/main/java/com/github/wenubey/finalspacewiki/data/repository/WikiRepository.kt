@@ -1,7 +1,6 @@
 package com.github.wenubey.finalspacewiki.data.repository
 
 import com.github.wenubey.finalspacewiki.data.remote.CharacterDataDto
-import com.github.wenubey.finalspacewiki.data.remote.CharactersDataDto
 import com.github.wenubey.finalspacewiki.data.remote.WikiApi
 import com.github.wenubey.finalspacewiki.domain.util.Resource
 import javax.inject.Inject
@@ -10,7 +9,7 @@ class WikiRepository  @Inject constructor(
     private val api: WikiApi,
 ) {
 
-    suspend fun getCharactersData(): Resource<CharactersDataDto> {
+    suspend fun getCharactersData(): Resource<List<CharacterDataDto>> {
         return try {
             Resource.Success(
                 data = api.getAllCharacters()

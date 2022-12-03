@@ -6,7 +6,7 @@ import retrofit2.http.Path
 interface WikiApi {
 
     @GET("character")
-    suspend fun getAllCharacters(): CharactersDataDto
+    suspend fun getAllCharacters(): List<CharacterDataDto>
 
     @GET("character/{id}")
     suspend fun getCharacter(

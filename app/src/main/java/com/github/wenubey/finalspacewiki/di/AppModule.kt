@@ -1,7 +1,6 @@
 package com.github.wenubey.finalspacewiki.di
 
 import com.github.wenubey.finalspacewiki.data.remote.WikiApi
-import com.github.wenubey.finalspacewiki.data.repository.WikiRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

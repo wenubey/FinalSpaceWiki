@@ -3,6 +3,7 @@ package com.github.wenubey.finalspacewiki.presentation
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.wenubey.finalspacewiki.data.repository.WikiRepository
@@ -13,8 +14,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class WikiViewModel @Inject constructor(
-    private val repository: WikiRepository
+    private val repository: WikiRepository,
 ) : ViewModel() {
+
     var listDataState by mutableStateOf(ListDataState())
         private set
 
