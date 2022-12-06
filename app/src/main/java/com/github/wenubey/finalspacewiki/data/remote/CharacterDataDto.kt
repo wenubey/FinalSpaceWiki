@@ -10,7 +10,7 @@ data class CharacterDataDto(
     @field:Json(name = "status")
     val status: String,
     @field:Json(name = "species")
-    val species: String,
+    val species: String? = null,
     @field:Json(name = "gender")
     val gender: String,
     @field:Json(name = "hair")
@@ -23,7 +23,6 @@ data class CharacterDataDto(
     val abilities: List<String>,
     @field:Json(name = "img_url")
     val img_url: String,
-    val isFavourite: Boolean = false,
 )
 
 

@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.github.wenubey.finalspacewiki.data.remote.CharacterDataDto
 import com.github.wenubey.finalspacewiki.data.repository.WikiRepository
 import com.github.wenubey.finalspacewiki.domain.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -72,4 +73,8 @@ class WikiViewModel @Inject constructor(
             }
         }
     }
+
+
+
+
 }
