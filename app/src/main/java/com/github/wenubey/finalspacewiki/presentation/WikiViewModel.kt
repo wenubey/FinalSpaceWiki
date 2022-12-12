@@ -29,31 +29,6 @@ class WikiViewModel @Inject constructor(
         loadCharactersList(true)
     }
 
-//    fun loadCharactersList() {
-////        viewModelScope.launch {
-////            listDataState = listDataState.copy(
-////                isLoading = true,
-////                error = null,
-////            )
-////            when(val result = repository.getCharactersData()) {
-////                is Resource.Success -> {
-////                    listDataState = listDataState.copy(
-////                        data = result.data,
-////                        isLoading = false,
-////                        error = null
-////                    )
-////                }
-////                is Resource.Error -> {
-////                    listDataState = listDataState.copy(
-////                        data = null,
-////                        isLoading = false,
-////                        error = result.message
-////                    )
-////                }
-////            }
-////        }
-////    }
-
     fun loadCharactersList(
         fetchFromRemote: Boolean = false
     ) {
@@ -104,29 +79,5 @@ class WikiViewModel @Inject constructor(
                 }
         }
     }
-
-
-//    viewModelScope.launch {
-//        characterDataState = characterDataState.copy(
-//            isLoading = true,
-//            error = null,
-//        )
-//        when(val result = repository.getCharacterData(id = id)){
-//            is Resource.Success -> {
-//                characterDataState = characterDataState.copy(
-//                    data = result.data,
-//                    isLoading = false,
-//                    error = null
-//                )
-//            }
-//            is Resource.Error  -> {
-//                characterDataState = characterDataState.copy(
-//                    data = null,
-//                    isLoading = false,
-//                    error = result.message
-//                )
-//            }
-//        }
-//    }
 
 }
