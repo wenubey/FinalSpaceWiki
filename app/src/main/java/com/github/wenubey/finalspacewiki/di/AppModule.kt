@@ -1,5 +1,9 @@
 package com.github.wenubey.finalspacewiki.di
 
+
+import android.app.Application
+import androidx.room.Room
+import com.github.wenubey.finalspacewiki.data.local.WikiDatabase
 import com.github.wenubey.finalspacewiki.data.remote.WikiApi
 import dagger.Module
 import dagger.Provides
@@ -23,6 +27,18 @@ object AppModule {
             .build()
             .create()
     }
+
+    @Provides
+    @Singleton
+    fun provideWikiDatabase(app: Application): WikiDatabase {
+        return Room.databaseBuilder(
+            app,
+            WikiDatabase::class.java,
+            "wiki.db"
+        ).build()
+    }
+
+
 
 
 }

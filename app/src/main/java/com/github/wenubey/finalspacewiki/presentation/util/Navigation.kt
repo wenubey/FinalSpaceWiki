@@ -1,4 +1,4 @@
-package com.github.wenubey.finalspacewiki.presentation
+package com.github.wenubey.finalspacewiki.presentation.util
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavType
@@ -6,7 +6,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.github.wenubey.finalspacewiki.presentation.WikiViewModel
 import com.github.wenubey.finalspacewiki.presentation.wikidetail.WikiDetailScreen
+import com.github.wenubey.finalspacewiki.presentation.wikilist.ListDataState
 import com.github.wenubey.finalspacewiki.presentation.wikilist.WikiListScreen
 
 @Composable

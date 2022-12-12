@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.github.wenubey.finalspacewiki.R
-import com.github.wenubey.finalspacewiki.data.remote.CharacterDataDto
+import com.github.wenubey.finalspacewiki.domain.model.CharacterData
 import com.github.wenubey.finalspacewiki.presentation.ui.theme.cardBackGroundColor
 import com.github.wenubey.finalspacewiki.presentation.util.*
 
@@ -23,7 +23,7 @@ import com.github.wenubey.finalspacewiki.presentation.util.*
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun WikiDetailCard(
-    data: CharacterDataDto,
+    data: CharacterData,
 ) {
     Card(
         modifier = Modifier

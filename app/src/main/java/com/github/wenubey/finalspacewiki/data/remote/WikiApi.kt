@@ -1,5 +1,6 @@
 package com.github.wenubey.finalspacewiki.data.remote
 
+
 import retrofit2.http.GET
 import retrofit2.http.Path
 

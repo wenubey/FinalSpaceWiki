@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import com.github.wenubey.finalspacewiki.presentation.ui.theme.FinalSpaceWikiTheme
+import com.github.wenubey.finalspacewiki.presentation.util.Navigation
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -16,6 +17,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         viewModel.loadCharactersList()
         setContent {
             FinalSpaceWikiTheme {

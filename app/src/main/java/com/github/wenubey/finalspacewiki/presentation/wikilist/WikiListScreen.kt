@@ -8,7 +8,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.github.wenubey.finalspacewiki.presentation.ListDataState
 import com.github.wenubey.finalspacewiki.presentation.ui.theme.appBarColor
 import com.github.wenubey.finalspacewiki.presentation.ui.theme.backGroundColor
 

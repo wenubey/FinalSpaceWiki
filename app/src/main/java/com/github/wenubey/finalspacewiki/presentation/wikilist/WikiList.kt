@@ -7,14 +7,13 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import com.github.wenubey.finalspacewiki.presentation.ListDataState
 
 @Composable
 fun WikiList(
     state: ListDataState,
     navController: NavController,
 ) {
-    state.data?.let { data ->
+    state.characters.let { data ->
         Column(modifier = Modifier.fillMaxSize()) {
             LazyVerticalGrid(
                 columns = GridCells.Fixed(3),

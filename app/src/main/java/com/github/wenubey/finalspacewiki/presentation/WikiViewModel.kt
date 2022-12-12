@@ -3,13 +3,14 @@ package com.github.wenubey.finalspacewiki.presentation
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.github.wenubey.finalspacewiki.data.remote.CharacterDataDto
 import com.github.wenubey.finalspacewiki.data.repository.WikiRepository
 import com.github.wenubey.finalspacewiki.domain.util.Resource
+import com.github.wenubey.finalspacewiki.presentation.wikidetail.CharacterDataState
+import com.github.wenubey.finalspacewiki.presentation.wikilist.ListDataState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,57 +25,108 @@ class WikiViewModel @Inject constructor(
     var characterDataState by mutableStateOf(CharacterDataState())
         private set
 
-    fun loadCharactersList() {
+    init {
+        loadCharactersList(true)
+    }
+
+//    fun loadCharactersList() {
+////        viewModelScope.launch {
+////            listDataState = listDataState.copy(
+////                isLoading = true,
+////                error = null,
+////            )
+////            when(val result = repository.getCharactersData()) {
+////                is Resource.Success -> {
+////                    listDataState = listDataState.copy(
+////                        data = result.data,
+////                        isLoading = false,
+////                        error = null
+////                    )
+////                }
+////                is Resource.Error -> {
+////                    listDataState = listDataState.copy(
+////                        data = null,
+////                        isLoading = false,
+////                        error = result.message
+////                    )
+////                }
+////            }
+////        }
+////    }
+
+    fun loadCharactersList(
+        fetchFromRemote: Boolean = false
+    ) {
         viewModelScope.launch {
-            listDataState = listDataState.copy(
-                isLoading = true,
-                error = null,
-            )
-            when(val result = repository.getCharactersData()) {
-                is Resource.Success -> {
-                    listDataState = listDataState.copy(
-                        data = result.data,
-                        isLoading = false,
-                        error = null
-                    )
+            repository
+                .getCharactersData(fetchFromRemote = fetchFromRemote)
+                .collect { result ->
+                    when(result) {
+                        is Resource.Success -> {
+                            result.data?.let { characters ->
+                                listDataState = listDataState.copy(
+                                    characters = characters,
+                                )
+                            }
+                        }
+                        is Resource.Error -> Unit
+                        is Resource.Loading -> {
+                            listDataState = listDataState.copy(
+                                isLoading = result.isLoading
+                            )
+                        }
+                    }
                 }
-                is Resource.Error -> {
-                    listDataState = listDataState.copy(
-                        data = null,
-                        isLoading = false,
-                        error = result.message
-                    )
-                }
-            }
         }
     }
 
-    fun loadCharacter(id: Int) {
+    fun loadCharacter(
+        id: Int,
+        fetchFromRemote: Boolean = false,
+    ) {
         viewModelScope.launch {
-            characterDataState = characterDataState.copy(
-                isLoading = true,
-                error = null,
-            )
-            when(val result = repository.getCharacterData(id = id)){
-                is Resource.Success -> {
-                    characterDataState = characterDataState.copy(
-                        data = result.data,
-                        isLoading = false,
-                        error = null
-                    )
+            repository
+                .getCharacterData(id = id, fetchFromRemote = fetchFromRemote)
+                .collect { result ->
+                    when(result) {
+                        is Resource.Success -> {
+                            characterDataState = characterDataState.copy(
+                                data = result.data
+                            )
+                        }
+                        is Resource.Loading -> {
+                            characterDataState = characterDataState.copy(
+                                isLoading = result.isLoading
+                            )
+                        }
+                        is Resource.Error -> Unit
+                    }
                 }
-                is Resource.Error  -> {
-                    characterDataState = characterDataState.copy(
-                        data = null,
-                        isLoading = false,
-                        error = result.message
-                    )
-                }
-            }
         }
     }
 
 
-
+//    viewModelScope.launch {
+//        characterDataState = characterDataState.copy(
+//            isLoading = true,
+//            error = null,
+//        )
+//        when(val result = repository.getCharacterData(id = id)){
+//            is Resource.Success -> {
+//                characterDataState = characterDataState.copy(
+//                    data = result.data,
+//                    isLoading = false,
+//                    error = null
+//                )
+//            }
+//            is Resource.Error  -> {
+//                characterDataState = characterDataState.copy(
+//                    data = null,
+//                    isLoading = false,
+//                    error = result.message
+//                )
+//            }
+//        }
+//    }
 
 }

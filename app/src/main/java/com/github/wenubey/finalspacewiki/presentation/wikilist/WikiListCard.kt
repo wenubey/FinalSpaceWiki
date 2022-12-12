@@ -14,17 +14,17 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.github.wenubey.finalspacewiki.data.remote.CharacterDataDto
-import com.github.wenubey.finalspacewiki.presentation.Screen
+import com.github.wenubey.finalspacewiki.domain.model.CharacterData
+import com.github.wenubey.finalspacewiki.presentation.util.Screen
 import com.github.wenubey.finalspacewiki.presentation.ui.theme.cardBackGroundColor
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun WikiListCard(
-    data: List<CharacterDataDto>,
+    data: List<CharacterData>,
     index: Int,
     modifier: Modifier = Modifier,
     navController: NavController,
