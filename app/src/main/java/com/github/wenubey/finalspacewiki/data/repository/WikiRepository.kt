@@ -89,7 +89,7 @@ class WikiRepository  @Inject constructor(
 
             remoteCharacterData?.let { character ->
                 dao.clearCharacter(id)
-                dao.insertCharacter(character.toCharacterDataEntity())
+                dao.insertCharacter(character.toCharacterDataEntity() )
                 emit(Resource.Success(
                     data = dao.getCharacterFromLocal(id).toCharacterData()
                 ))
