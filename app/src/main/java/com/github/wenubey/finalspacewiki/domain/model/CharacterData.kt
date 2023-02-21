@@ -1,7 +1,5 @@
 package com.github.wenubey.finalspacewiki.domain.model
 
-import com.squareup.moshi.Json
-
 data class CharacterData(
     val id: Int,
     val name: String,

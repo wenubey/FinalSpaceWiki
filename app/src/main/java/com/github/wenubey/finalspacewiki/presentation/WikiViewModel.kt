@@ -5,11 +5,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.room.Query
 import com.github.wenubey.finalspacewiki.data.repository.WikiRepository
 import com.github.wenubey.finalspacewiki.domain.util.Resource
 import com.github.wenubey.finalspacewiki.presentation.wikidetail.CharacterDataState
 import com.github.wenubey.finalspacewiki.presentation.wikilist.ListDataState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -25,8 +28,41 @@ class WikiViewModel @Inject constructor(
     var characterDataState by mutableStateOf(CharacterDataState())
         private set
 
+    var searchQuery = mutableStateOf("")
+        private set
+
+    private var searchJob: Job? = null
+
     init {
         loadCharactersList(true)
+    }
+
+    fun onSearch(query: String) {
+        searchQuery.value = query
+        searchJob?.cancel()
+        searchJob = viewModelScope.launch {
+            delay(500L)
+            repository.getCharactersData(true)
+                .collect { result ->
+                    when (result) {
+                        is Resource.Success -> {
+                            result.data?.let { characters ->
+                                listDataState = listDataState.copy(
+                                    characters = characters.filter {
+                                        it.name.contains(query, ignoreCase = true)
+                                    }
+                                )
+                            }
+                        }
+                        is Resource.Error -> Unit
+                        is Resource.Loading -> {
+                            listDataState = listDataState.copy(
+                                isLoading = result.isLoading
+                            )
+                        }
+                    }
+                }
+        }
     }
 
     fun loadCharactersList(
@@ -36,7 +72,7 @@ class WikiViewModel @Inject constructor(
             repository
                 .getCharactersData(fetchFromRemote = fetchFromRemote)
                 .collect { result ->
-                    when(result) {
+                    when (result) {
                         is Resource.Success -> {
                             result.data?.let { characters ->
                                 listDataState = listDataState.copy(
@@ -63,7 +99,7 @@ class WikiViewModel @Inject constructor(
             repository
                 .getCharacterData(id = id, fetchFromRemote = fetchFromRemote)
                 .collect { result ->
-                    when(result) {
+                    when (result) {
                         is Resource.Success -> {
                             characterDataState = characterDataState.copy(
                                 data = result.data

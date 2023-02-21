@@ -2,14 +2,14 @@ package com.github.wenubey.finalspacewiki.data.local
 
 import androidx.room.Dao
 import androidx.room.Insert
-import androidx.room.OnConflictStrategy.REPLACE
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.github.wenubey.finalspacewiki.domain.model.CharacterData
 
 @Dao
 interface WikiDao {
 
-    @Insert(onConflict = REPLACE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCharactersData(
         characterDataEntities: List<CharacterDataEntity>
     )
@@ -26,7 +26,7 @@ interface WikiDao {
     @Query("DELETE FROM characterdataentity WHERE id = :id")
     suspend fun clearCharacter(id: Int)
 
-    @Insert(onConflict = REPLACE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCharacter(
         characterDataEntity: CharacterDataEntity
     )

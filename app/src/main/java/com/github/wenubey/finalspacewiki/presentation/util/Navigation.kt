@@ -24,7 +24,7 @@ fun Navigation(
         composable(
             route = Screen.WikiListScreen.route
         ) {
-            WikiListScreen(state = listDataState, navController)
+            WikiListScreen(state = listDataState, navController, viewModel = viewModel)
         }
         composable(
             route = Screen.WikiDetailScreen.route + "/{id}",
