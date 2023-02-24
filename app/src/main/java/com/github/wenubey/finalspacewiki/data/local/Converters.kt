@@ -11,7 +11,6 @@ class Converters {
 
     @TypeConverter
     fun fromStringArrayList(value: List<String>): String {
-
         return Gson().toJson(value)
     }
 

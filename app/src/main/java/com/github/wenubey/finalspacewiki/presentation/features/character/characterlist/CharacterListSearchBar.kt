@@ -1,8 +1,7 @@
-package com.github.wenubey.finalspacewiki.presentation.wikilist
+package com.github.wenubey.finalspacewiki.presentation.features.character.characterlist
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
@@ -12,14 +11,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.github.wenubey.finalspacewiki.R
-import com.github.wenubey.finalspacewiki.presentation.WikiViewModel
+import com.github.wenubey.finalspacewiki.presentation.features.character.CharacterViewModel
 
 @ExperimentalMaterial3Api
 @Composable
-fun WikiListSearchBar(viewModel: WikiViewModel) {
+fun CharacterListSearchBar(
+    viewModel: CharacterViewModel
+) {
     TextField(
         modifier = Modifier
             .padding(4.dp)

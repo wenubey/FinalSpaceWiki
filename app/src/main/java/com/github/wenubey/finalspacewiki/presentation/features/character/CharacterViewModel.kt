@@ -1,28 +1,26 @@
-package com.github.wenubey.finalspacewiki.presentation
+package com.github.wenubey.finalspacewiki.presentation.features.character
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.room.Query
 import com.github.wenubey.finalspacewiki.data.repository.WikiRepository
 import com.github.wenubey.finalspacewiki.domain.util.Resource
-import com.github.wenubey.finalspacewiki.presentation.wikidetail.CharacterDataState
-import com.github.wenubey.finalspacewiki.presentation.wikilist.ListDataState
+import com.github.wenubey.finalspacewiki.presentation.features.character.characterdetail.CharacterDataState
+import com.github.wenubey.finalspacewiki.presentation.features.character.characterlist.CharacterListDataState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class WikiViewModel @Inject constructor(
+class CharacterViewModel @Inject constructor(
     private val repository: WikiRepository,
 ) : ViewModel() {
 
-    var listDataState by mutableStateOf(ListDataState())
+    var characterListDataState by mutableStateOf(CharacterListDataState())
         private set
 
     var characterDataState by mutableStateOf(CharacterDataState())
@@ -47,7 +45,7 @@ class WikiViewModel @Inject constructor(
                     when (result) {
                         is Resource.Success -> {
                             result.data?.let { characters ->
-                                listDataState = listDataState.copy(
+                                characterListDataState = characterListDataState.copy(
                                     characters = characters.filter {
                                         it.name.contains(query, ignoreCase = true)
                                     }
@@ -56,7 +54,7 @@ class WikiViewModel @Inject constructor(
                         }
                         is Resource.Error -> Unit
                         is Resource.Loading -> {
-                            listDataState = listDataState.copy(
+                            characterListDataState = characterListDataState.copy(
                                 isLoading = result.isLoading
                             )
                         }
@@ -75,14 +73,15 @@ class WikiViewModel @Inject constructor(
                     when (result) {
                         is Resource.Success -> {
                             result.data?.let { characters ->
-                                listDataState = listDataState.copy(
+                                characterListDataState = characterListDataState.copy(
                                     characters = characters,
                                 )
                             }
                         }
+                        //TODO: ADD ERROR SCREEN
                         is Resource.Error -> Unit
                         is Resource.Loading -> {
-                            listDataState = listDataState.copy(
+                            characterListDataState = characterListDataState.copy(
                                 isLoading = result.isLoading
                             )
                         }
@@ -110,6 +109,7 @@ class WikiViewModel @Inject constructor(
                                 isLoading = result.isLoading
                             )
                         }
+                        //TODO: ADD ERROR SCREEN
                         is Resource.Error -> Unit
                     }
                 }

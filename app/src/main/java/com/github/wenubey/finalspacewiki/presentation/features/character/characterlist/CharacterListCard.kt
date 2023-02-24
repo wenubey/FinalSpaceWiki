@@ -1,6 +1,6 @@
-@file:OptIn(ExperimentalGlideComposeApi::class)
 
-package com.github.wenubey.finalspacewiki.presentation.wikilist
+
+package com.github.wenubey.finalspacewiki.presentation.features.character.characterlist
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -16,14 +16,13 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
-import com.github.wenubey.finalspacewiki.data.remote.CharacterDataDto
 import com.github.wenubey.finalspacewiki.domain.model.CharacterData
 import com.github.wenubey.finalspacewiki.presentation.util.Screen
 import com.github.wenubey.finalspacewiki.presentation.ui.theme.cardBackGroundColor
 
-@OptIn(ExperimentalMaterialApi::class)
+@OptIn(ExperimentalMaterialApi::class, ExperimentalGlideComposeApi::class)
 @Composable
-fun WikiListCard(
+fun CharacterListCard(
     data: List<CharacterData>,
     index: Int,
     modifier: Modifier = Modifier,
@@ -36,7 +35,7 @@ fun WikiListCard(
         backgroundColor = cardBackGroundColor,
         shape = RoundedCornerShape(20.dp),
         onClick = {
-            navController.navigate(Screen.WikiDetailScreen.route + "/${data[index].id}")
+            navController.navigate(Screen.CharacterDetailScreen.route + "/${data[index].id}")
         }
     ) {
         Column(
@@ -56,3 +55,6 @@ fun WikiListCard(
         }
     }
 }
+
+
+

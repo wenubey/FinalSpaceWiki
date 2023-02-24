@@ -1,6 +1,6 @@
 package com.github.wenubey.finalspacewiki.data.mapper
 
-import com.github.wenubey.finalspacewiki.data.local.CharacterDataEntity
+import com.github.wenubey.finalspacewiki.data.local.entities.CharacterDataEntity
 import com.github.wenubey.finalspacewiki.data.remote.CharacterDataDto
 import com.github.wenubey.finalspacewiki.domain.model.CharacterData
 

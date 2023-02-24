@@ -1,3 +1,16 @@
 <resources>
-    <string name="app_name">Final Space\nWiki</string>
+    <string name="app_name" translatable="false">Final Space\nWiki</string>
+    <string name="species">Species</string>
+    <string name="unknown">Unknown</string>
+    <string name="hair_color">Hair Color</string>
+    <string name="origin">Origin</string>
+    <string name="app_bar_title" translatable="false">Final Space Wiki</string>
+    <string name="app_purpose">The purpose of this application is to provide information about the final space sequence, you can search by typing the character you want in the search bar.</string>
+    <string name="copyright">Copyright</string>
+    <string name="how_to_use">How To Use</string>
+    <string name="copyright_first">Final Space is created by Olan Rogers for  </string>
+    <string name="tbs"> TBS </string>
+    <string name="copyright_second">  and later picked by  </string>
+    <string name="adult_swim"> Adult Swim. </string>
+    <string name="copyright_third">The data and images are used without claim of ownership and belong to their respective owners. I do not own the rights to any material provided in this API.</string>
 </resources>

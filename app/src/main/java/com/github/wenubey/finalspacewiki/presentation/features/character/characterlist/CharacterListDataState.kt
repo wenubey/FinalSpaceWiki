@@ -1,8 +1,8 @@
-package com.github.wenubey.finalspacewiki.presentation.wikilist
+package com.github.wenubey.finalspacewiki.presentation.features.character.characterlist
 
 import com.github.wenubey.finalspacewiki.domain.model.CharacterData
 
-data class ListDataState(
+data class CharacterListDataState(
     val characters: List<CharacterData> = emptyList(),
     val isLoading: Boolean = false,
     val error: String? = null,

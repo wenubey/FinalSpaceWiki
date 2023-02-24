@@ -1,4 +1,4 @@
-package com.github.wenubey.finalspacewiki.presentation.wikidetail
+package com.github.wenubey.finalspacewiki.presentation.features.character.characterdetail
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -7,15 +7,13 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.github.wenubey.finalspacewiki.R
 
 @Composable
-fun WikiDetailRow(
+fun CharacterDetailRow(
     hintText: String,
     dataText: String,
     imageVector: Int,

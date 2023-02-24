@@ -13,4 +13,12 @@ interface WikiApi {
     suspend fun getCharacter(
         @Path("id") id: Int,
     ): CharacterDataDto
+
+    @GET("location")
+    suspend fun getAllLocations(): List<LocationDataDto>
+
+    @GET("location/{id}")
+    suspend fun getLocation(
+        @Path("id") id: Int,
+    ): LocationDataDto
 }

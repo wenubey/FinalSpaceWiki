@@ -1,7 +1,6 @@
-package com.github.wenubey.finalspacewiki.presentation.wikidetail
+package com.github.wenubey.finalspacewiki.presentation.features.character.characterdetail
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -13,8 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -30,7 +29,7 @@ import com.github.wenubey.finalspacewiki.presentation.util.*
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun WikiDetailCard(
+fun CharacterDetailCard(
     data: CharacterData,
 ) {
     val scrollState = rememberScrollState()
@@ -86,35 +85,35 @@ fun WikiDetailCard(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = "Species",
+                        text = stringResource(R.string.species),
                         fontSize = 24.sp,
                         fontStyle = FontStyle.Italic
                     )
                     Text(
-                        text = data.species ?: "Unknown",
+                        text = data.species ?: stringResource(R.string.unknown),
                         textAlign = TextAlign.Center,
                         fontSize = MaterialTheme.typography.body1.fontSize
                     )
                     Spacer(modifier = Modifier.height(8.dp))
-                    WikiDetailRow(
-                        hintText = "Hair Color",
+                    CharacterDetailRow(
+                        hintText = stringResource(R.string.hair_color),
                         dataText = data.hair,
                         imageVector = R.drawable.ic_hair
                     )
                     Spacer(modifier = Modifier.height(8.dp))
-                    WikiDetailRow(
-                        hintText = "Origin",
+                    CharacterDetailRow(
+                        hintText = stringResource(R.string.origin),
                         dataText = data.origin,
                         imageVector = R.drawable.ic_earth
                     )
                 }
                 Spacer(modifier = Modifier.height(8.dp))
-                WikiDetailAliasAbilitiesRow(
+                CharacterDetailAliasAbilitiesRow(
                     imageVector = R.drawable.ic_brain,
                     list = data.abilities
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                WikiDetailAliasAbilitiesRow(imageVector = R.drawable.ic_id, list = data.alias)
+                CharacterDetailAliasAbilitiesRow(imageVector = R.drawable.ic_id, list = data.alias)
 
             }
         }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="species">Türü</string>
+    <string name="unknown">Bilinmiyor</string>
+    <string name="hair_color">Saç Rengi</string>
+    <string name="origin">Köken</string>
+    <string name="app_purpose">Bu uygulamanin amaci final space dizisi hakkinda bilgi sunmaktir arama cubuguna istediginiz karakteri yazip aratabilirsiniz.</string>
+    <string name="copyright">Yasal Haklar</string>
+    <string name="how_to_use">Nasıl Kullanılır</string>
+    <string name="copyright_first">Final Space Olan Rogers tarafından önce bu firma için üretildi </string>
+    <string name="tbs"> TBS </string>
+    <string name="copyright_second">ve sonrasından bu firma satın aldı </string>
+    <string name="adult_swim"> Adult Swim. </string>
+    <string name="copyright_third">Veriler ve resimler, sahiplik iddiası olmaksızın kullanılır ve ilgili sahiplerine aittir. Bu API\'de sağlanan herhangi bir materyalin haklarına sahip değilim.</string>
+
+</resources>

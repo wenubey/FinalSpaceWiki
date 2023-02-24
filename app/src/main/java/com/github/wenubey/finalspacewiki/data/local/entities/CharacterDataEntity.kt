@@ -1,9 +1,9 @@
-package com.github.wenubey.finalspacewiki.data.local
+package com.github.wenubey.finalspacewiki.data.local.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "characters")
 data class CharacterDataEntity (
     @PrimaryKey val uid: Int? = null,
     val id: Int,
