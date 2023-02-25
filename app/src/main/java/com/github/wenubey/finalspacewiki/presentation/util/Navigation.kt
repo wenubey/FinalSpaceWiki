@@ -52,7 +52,7 @@ fun Navigation(
         composable(
             route = Screen.LocationListScreen.route
         ) {
-            LocationListScreen()
+            LocationListScreen(context = context, navController = navController)
         }
         composable(
             route = Screen.LocationDetailScreen.route + "/{id}",
