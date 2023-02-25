@@ -18,7 +18,8 @@ import com.github.wenubey.finalspacewiki.presentation.features.character.Charact
 fun CharacterList(
     state: CharacterListDataState,
     navController: NavController,
-    viewModel: CharacterViewModel
+    viewModel: CharacterViewModel,
+    modifier: Modifier = Modifier
 ) {
     state.characters.let { data ->
         Column(modifier = Modifier.fillMaxSize()) {

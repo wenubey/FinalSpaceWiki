@@ -8,5 +8,5 @@ sealed class WikiNavBarItem(val route: String, val icon: Int, val title: String)
 
   object LocationList: WikiNavBarItem("locationListScreen", R.drawable.planet_earth, "Locations")
 
-  //object CharacterList: WikiNavBarItem("characterListScreen", R.drawable.baseline_person_24, "Characters")
+  //object EpisodeList: WikiNavBarItem("episodeListScreen", R.drawable.chapter, "Episodes")
 }

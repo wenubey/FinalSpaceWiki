@@ -5,11 +5,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.room.Query
 import com.github.wenubey.finalspacewiki.data.repository.WikiRepository
 import com.github.wenubey.finalspacewiki.domain.util.Resource
 import com.github.wenubey.finalspacewiki.presentation.features.location.locationdetail.LocationDataState
 import com.github.wenubey.finalspacewiki.presentation.features.location.locationlist.LocationListDataState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -25,8 +28,42 @@ class LocationViewModel @Inject constructor(
   var locationListDataState by mutableStateOf(LocationListDataState())
     private set
 
+  var searchQuery = mutableStateOf("")
+    private set
+
+  private var searchJob: Job? = null
+
   init {
     loadLocationsList(true)
+  }
+
+
+  fun onSearch(query: String) {
+    searchQuery.value = query
+    searchJob?.cancel()
+    searchJob = viewModelScope.launch {
+      delay(500L)
+      repository.getLocationsData(true)
+        .collect { result ->
+          when(result) {
+            is Resource.Success -> {
+              result.data?.let { locations->
+                locationListDataState = locationListDataState.copy(
+                  locations = locations.filter {
+                    it.name.contains(query, ignoreCase = true)
+                  }
+                )
+              }
+            }
+            is Resource.Error -> Unit
+            is Resource.Loading -> {
+              locationListDataState = locationListDataState.copy(
+                isLoading = result.isLoading
+              )
+            }
+          }
+        }
+    }
   }
 
   fun loadLocationsList(fetchFromRemote: Boolean = false) {

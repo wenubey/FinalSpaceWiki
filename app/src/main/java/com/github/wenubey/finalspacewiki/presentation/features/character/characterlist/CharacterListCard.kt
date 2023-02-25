@@ -19,6 +19,7 @@ import com.bumptech.glide.integration.compose.GlideImage
 import com.github.wenubey.finalspacewiki.domain.model.CharacterData
 import com.github.wenubey.finalspacewiki.presentation.util.Screen
 import com.github.wenubey.finalspacewiki.presentation.ui.theme.cardBackGroundColor
+import com.github.wenubey.finalspacewiki.presentation.util.Size
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalGlideComposeApi::class)
 @Composable
@@ -28,10 +29,13 @@ fun CharacterListCard(
     modifier: Modifier = Modifier,
     navController: NavController,
 ) {
+    val screenSize = Size()
+    val screenHeight = screenSize.height()
+    val screenWidth = screenSize.width()
     Card(
         modifier = modifier
             .padding(8.dp)
-            .size(width = 120.dp, height = 150.dp),
+            .size(width = (screenWidth * 0.1).dp, height = (screenHeight * 0.18).dp),
         backgroundColor = cardBackGroundColor,
         shape = RoundedCornerShape(20.dp),
         onClick = {

@@ -18,52 +18,62 @@ import com.github.wenubey.finalspacewiki.presentation.features.location.location
 
 @Composable
 fun Navigation(
-    characterListDataState: CharacterListDataState,
-    locationListDataState: LocationListDataState,
-    characterViewModel: CharacterViewModel,
-    locationViewModel: LocationViewModel,
-    context: Context,
+  characterListDataState: CharacterListDataState,
+  locationListDataState: LocationListDataState,
+  characterViewModel: CharacterViewModel,
+  locationViewModel: LocationViewModel,
+  context: Context,
 ) {
-    val navController = rememberNavController()
-    NavHost(
-        navController = navController,
-        startDestination =  Screen.CharacterListScreen.route
+  val navController = rememberNavController()
+  NavHost(
+    navController = navController,
+    startDestination = Screen.CharacterListScreen.route
+  ) {
+    composable(
+      route = Screen.CharacterListScreen.route
     ) {
-        composable(
-            route = Screen.CharacterListScreen.route
-        ) {
-            CharacterListScreen(state = characterListDataState, navController, viewModel = characterViewModel, context = context)
-        }
-        composable(
-            route = Screen.CharacterDetailScreen.route + "/{id}",
-            arguments = listOf(
-                navArgument("id") {
-                    type = NavType.IntType
-                    defaultValue = 0
-
-                }
-            )
-        ) {
-            CharacterDetailScreen(
-                viewModel = characterViewModel,
-                id = it.arguments?.getInt("id"),
-            )
-        }
-        composable(
-            route = Screen.LocationListScreen.route
-        ) {
-            LocationListScreen(context = context, navController = navController)
-        }
-        composable(
-            route = Screen.LocationDetailScreen.route + "/{id}",
-            arguments = listOf(
-                navArgument("id") {
-                    type = NavType.IntType
-                    defaultValue = 0
-                }
-            )
-        ) {
-            LocationDetailScreen(viewModel = locationViewModel, context = context)
-        }
+      CharacterListScreen(
+        state = characterListDataState,
+        navController,
+        viewModel = characterViewModel,
+        context = context
+      )
     }
+    composable(
+      route = Screen.CharacterDetailScreen.route + "/{id}",
+      arguments = listOf(
+        navArgument("id") {
+          type = NavType.IntType
+          defaultValue = 0
+
+        }
+      )
+    ) {
+      CharacterDetailScreen(
+        viewModel = characterViewModel,
+        id = it.arguments?.getInt("id"),
+      )
+    }
+    composable(
+      route = Screen.LocationListScreen.route
+    ) {
+      LocationListScreen(
+        context = context,
+        navController = navController,
+        state = locationListDataState,
+        viewModel = locationViewModel,
+      )
+    }
+    composable(
+      route = Screen.LocationDetailScreen.route + "/{id}",
+      arguments = listOf(
+        navArgument("id") {
+          type = NavType.IntType
+          defaultValue = 0
+        }
+      )
+    ) {
+      LocationDetailScreen(viewModel = locationViewModel, context = context)
+    }
+  }
 }

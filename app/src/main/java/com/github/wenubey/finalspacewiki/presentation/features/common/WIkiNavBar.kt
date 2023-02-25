@@ -1,6 +1,10 @@
 package com.github.wenubey.finalspacewiki.presentation.features.common
 
+
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.MaterialTheme
@@ -16,25 +20,34 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.github.wenubey.finalspacewiki.presentation.ui.theme.appBarColor
 import com.github.wenubey.finalspacewiki.presentation.ui.theme.backGroundColor
+import com.github.wenubey.finalspacewiki.presentation.util.Size
 
 @Composable
 fun WikiNavBar(
-  navController: NavController
+  navController: NavController,
 ) {
 
   val items = listOf(
     WikiNavBarItem.CharacterList,
     WikiNavBarItem.LocationList
   )
+  val screenSize = Size()
+  val screenHeight = screenSize.height()
+  val screenWidth = screenSize.width()
   BottomNavigation(
     modifier = Modifier
-      .fillMaxWidth(),
+      .fillMaxWidth()
+      .size(
+        width = screenWidth.dp,
+        height = (screenHeight * 0.07).dp,
+      ),
     backgroundColor = appBarColor,
-    contentColor = Color.White
+    contentColor = Color.White,
   ) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
@@ -57,7 +70,7 @@ fun WikiNavBar(
           Icon(
             painter = painterResource(id = item.icon),
             contentDescription = item.title,
-            )
+          )
         },
         label = { Text(text = item.title, style = MaterialTheme.typography.body1) },
         selectedContentColor = Color.White,
