@@ -5,7 +5,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.room.Query
 import com.github.wenubey.finalspacewiki.data.repository.WikiRepository
 import com.github.wenubey.finalspacewiki.domain.util.Resource
 import com.github.wenubey.finalspacewiki.presentation.features.location.locationdetail.LocationDataState
@@ -13,7 +12,6 @@ import com.github.wenubey.finalspacewiki.presentation.features.location.location
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -55,7 +53,11 @@ class LocationViewModel @Inject constructor(
                 )
               }
             }
-            is Resource.Error -> Unit
+            is Resource.Error -> {
+              locationListDataState = locationListDataState.copy(
+                error = result.message
+              )
+            }
             is Resource.Loading -> {
               locationListDataState = locationListDataState.copy(
                 isLoading = result.isLoading
@@ -84,8 +86,12 @@ class LocationViewModel @Inject constructor(
                 isLoading = result.isLoading
               )
             }
-            //TODO: ADD ERROR SCREEN
-            is Resource.Error -> Unit
+
+            is Resource.Error -> {
+              locationListDataState = locationListDataState.copy(
+                error = result.message
+              )
+            }
           }
         }
     }
@@ -110,8 +116,11 @@ class LocationViewModel @Inject constructor(
                 isLoading = result.isLoading
               )
             }
-            //TODO: ADD ERROR SCREEN
-            is Resource.Error -> Unit
+            is Resource.Error -> {
+              locationDataState = locationDataState.copy(
+                error = result.message
+              )
+            }
           }
         }
     }

@@ -2,12 +2,10 @@ package com.github.wenubey.finalspacewiki.data.repository
 
 
 import com.github.wenubey.finalspacewiki.data.local.WikiDatabase
-import com.github.wenubey.finalspacewiki.data.mapper.toCharacterData
-import com.github.wenubey.finalspacewiki.data.mapper.toCharacterDataEntity
-import com.github.wenubey.finalspacewiki.data.mapper.toLocationData
-import com.github.wenubey.finalspacewiki.data.mapper.toLocationDataEntity
+import com.github.wenubey.finalspacewiki.data.mapper.*
 import com.github.wenubey.finalspacewiki.data.remote.WikiApi
 import com.github.wenubey.finalspacewiki.domain.model.CharacterData
+import com.github.wenubey.finalspacewiki.domain.model.EpisodeData
 import com.github.wenubey.finalspacewiki.domain.model.LocationData
 import com.github.wenubey.finalspacewiki.domain.util.Resource
 import kotlinx.coroutines.flow.Flow
@@ -69,7 +67,6 @@ class WikiRepository @Inject constructor(
           data = localCharacterData.toCharacterData()
         )
       )
-
       if (!fetchFromRemote) {
         emit(Resource.Loading(false))
         return@flow
@@ -82,7 +79,6 @@ class WikiRepository @Inject constructor(
         emit(Resource.Error("An error occurred $e"))
         null
       }
-
       remoteCharacterData?.let { character ->
         dao.clearCharacter(id)
         dao.insertCharacter(character.toCharacterDataEntity())
@@ -169,6 +165,85 @@ class WikiRepository @Inject constructor(
             data = dao.getLocationFromLocal(id).toLocationData()
           )
         )
+        emit(Resource.Loading(false))
+      }
+    }
+  }
+
+  suspend fun getEpisodeData(
+    id: Int,
+    fetchFromRemote: Boolean = false
+  ): Flow<Resource<EpisodeData>> {
+    return flow {
+      emit(Resource.Loading(true))
+      val localEpisodeData = dao.getEpisodeFromLocal(id)
+      emit(
+        Resource.Success(
+          data = localEpisodeData.toEpisodeData()
+        )
+      )
+
+      if (!fetchFromRemote) {
+        emit(Resource.Loading(false))
+        return@flow
+      }
+
+      val remoteEpisodeData = try {
+        api.getEpisode(id)
+      } catch (e: Exception) {
+        e.printStackTrace()
+        emit(Resource.Error("An error occurred $e"))
+        null
+      }
+
+      remoteEpisodeData?.let { episode ->
+        dao.clearEpisode(id)
+        dao.insertEpisode(episode.toEpisodeDataEntity())
+        emit(
+          Resource.Success(
+            data = dao.getEpisodeFromLocal(id).toEpisodeData()
+          )
+        )
+        emit(Resource.Loading(false))
+      }
+    }
+  }
+
+  suspend fun getEpisodesData(
+    fetchFromRemote: Boolean
+  ): Flow<Resource<List<EpisodeData>>> {
+    return flow {
+      emit(Resource.Loading(true))
+      val localEpisodesData = dao.getEpisodesData()
+      emit(
+        Resource.Success(
+          data = localEpisodesData.map { it.toEpisodeData() }
+        )
+      )
+      val isDbEmpty = localEpisodesData.isEmpty()
+      val shouldJustLoadFromCache = !isDbEmpty && !fetchFromRemote
+      if (shouldJustLoadFromCache) {
+        emit(Resource.Loading(false))
+        return@flow
+      }
+
+      val remoteEpisodesData = try {
+        api.getAllEpisodes()
+      } catch (e: Exception) {
+        e.printStackTrace()
+        emit(Resource.Error("An error occurred $e"))
+        null
+      }
+
+      remoteEpisodesData?.let { data ->
+        dao.clearEpisodesData()
+        dao.insertEpisodesData(
+          data.map { it.toEpisodeDataEntity() }
+        )
+        emit(Resource.Success(
+          data = dao.getEpisodesData()
+            .map { it.toEpisodeData() }
+        ))
         emit(Resource.Loading(false))
       }
     }

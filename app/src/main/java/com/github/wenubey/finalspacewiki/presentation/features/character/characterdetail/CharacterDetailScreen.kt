@@ -12,6 +12,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+import com.github.wenubey.finalspacewiki.domain.util.Resource
 import com.github.wenubey.finalspacewiki.presentation.features.character.CharacterViewModel
 import com.github.wenubey.finalspacewiki.presentation.features.common.WikiTopBar
 import com.github.wenubey.finalspacewiki.presentation.ui.theme.backGroundColor

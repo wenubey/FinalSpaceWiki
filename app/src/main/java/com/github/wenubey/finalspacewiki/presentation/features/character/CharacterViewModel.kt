@@ -14,7 +14,6 @@ import com.github.wenubey.finalspacewiki.presentation.features.location.location
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -58,7 +57,11 @@ class CharacterViewModel @Inject constructor(
                 )
               }
             }
-            is Resource.Error -> Unit
+            is Resource.Error -> {
+              characterListDataState = characterListDataState.copy(
+                error = result.message
+              )
+            }
             is Resource.Loading -> {
               characterListDataState = characterListDataState.copy(
                 isLoading = result.isLoading
@@ -84,8 +87,11 @@ class CharacterViewModel @Inject constructor(
                 )
               }
             }
-            //TODO: ADD ERROR SCREEN
-            is Resource.Error -> Unit
+            is Resource.Error -> {
+              characterListDataState = characterListDataState.copy(
+                error = result.message
+              )
+            }
             is Resource.Loading -> {
               characterListDataState = characterListDataState.copy(
                 isLoading = result.isLoading
@@ -97,7 +103,6 @@ class CharacterViewModel @Inject constructor(
   }
 
   fun loadCharactersListForLocation(
-    fetchFromRemote: Boolean = false,
     idList: List<Int>
   ) {
     viewModelScope.launch {
@@ -112,10 +117,15 @@ class CharacterViewModel @Inject constructor(
                 }
               }
               is Resource.Loading -> {
-
+                characterListForLocationDataState = characterListForLocationDataState.copy(
+                  isLoading = result.isLoading
+                )
               }
-              //TODO: ADD ERROR SCREEN
-              is Resource.Error -> Unit
+              is Resource.Error -> {
+                characterListForLocationDataState = characterListForLocationDataState.copy(
+                  error = result.message
+                )
+              }
             }
           }
       }
@@ -144,8 +154,12 @@ class CharacterViewModel @Inject constructor(
                 isLoading = result.isLoading
               )
             }
-            //TODO: ADD ERROR SCREEN
-            is Resource.Error -> Unit
+
+            is Resource.Error -> {
+              characterDataState = characterDataState.copy(
+                error = result.message
+              )
+            }
           }
         }
     }

@@ -67,7 +67,7 @@ fun LocationDetailCard(
         contentDescription = data.name,
         contentScale = ContentScale.FillWidth,
         modifier = Modifier
-          .padding(8.dp)
+          .padding(start = 8.dp, end = 8.dp, top = 4.dp, bottom = 4.dp)
           .clip(RoundedCornerShape(16.dp))
       )
       Spacer(modifier = Modifier.height(4.dp))
@@ -84,7 +84,11 @@ fun LocationDetailCard(
         }
       )
       Spacer(modifier = Modifier.height(4.dp))
-      LazyVerticalGrid(columns = GridCells.Fixed(3), content = {
+      Text(text = "Notable Residents", style = MaterialTheme.typography.h2)
+      Spacer(modifier = Modifier.height(4.dp))
+      LazyVerticalGrid(
+        columns = GridCells.Fixed(3),
+        content = {
         characterViewModel.characterListForLocationDataState.data?.let { characters ->
           items(characters.size) {index ->
             CharacterListCard(
