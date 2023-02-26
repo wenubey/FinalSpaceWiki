@@ -30,6 +30,7 @@ class MainActivity : ComponentActivity() {
           locationViewModel = locationViewModel,
           context = applicationContext
         )
+
       }
     }
   }

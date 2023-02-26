@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.github.wenubey.finalspacewiki.presentation.features.common.WikiNavBar
+import com.github.wenubey.finalspacewiki.presentation.features.common.WikiSearchBar
 import com.github.wenubey.finalspacewiki.presentation.features.location.LocationViewModel
 import com.github.wenubey.finalspacewiki.presentation.util.Size
 
@@ -24,9 +25,9 @@ fun LocationList(
     Column(
       modifier =Modifier
         .padding(8.dp)
-        .size(width = screenWidth.dp, height = (screenHeight * 0.87).dp)
+        .size(width = screenWidth.dp, height = (screenHeight * 0.85).dp)
     ) {
-      LocationListSearchBar(viewModel = viewModel)
+      WikiSearchBar(value = viewModel.searchQuery.value, onValueChange = viewModel::onSearch)
       Spacer(modifier = Modifier.height(4.dp))
       LazyVerticalGrid(
         modifier = Modifier.size(width = screenWidth.dp, height = (screenHeight * 1).dp),

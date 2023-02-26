@@ -38,6 +38,7 @@ fun LocationListCard(
     shape = RoundedCornerShape(20.dp),
     onClick = {
       navController.navigate(Screen.LocationDetailScreen.route + "/${data[index].id}")
+      println(Screen.LocationDetailScreen.route + "/${data[index].id}")
     }
   ) {
     Column(

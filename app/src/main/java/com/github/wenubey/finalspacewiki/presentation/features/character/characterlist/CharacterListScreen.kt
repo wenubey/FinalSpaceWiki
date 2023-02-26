@@ -16,10 +16,12 @@ import com.github.wenubey.finalspacewiki.presentation.features.common.WikiNavBar
 import com.github.wenubey.finalspacewiki.presentation.features.common.WikiTopBar
 import com.github.wenubey.finalspacewiki.presentation.ui.theme.backGroundColor
 import com.github.wenubey.finalspacewiki.presentation.util.Size
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 @Composable
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter", "CoroutineCreationDuringComposition")
 fun CharacterListScreen(
   state: CharacterListDataState,
   navController: NavController,

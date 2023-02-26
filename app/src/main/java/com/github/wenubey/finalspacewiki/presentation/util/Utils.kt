@@ -53,5 +53,12 @@ fun createCopyRightString(context: Context): AnnotatedString {
     }
 }
 
-val annotatedString = buildAnnotatedString {
+fun List<String>.toIntList() : List<Int> {
+    val list = mutableListOf<Int>()
+    this.forEach { data ->
+        list.add(
+            data.last().digitToInt()
+        )
     }
+    return list
+}

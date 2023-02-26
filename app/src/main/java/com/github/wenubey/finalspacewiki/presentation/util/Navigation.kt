@@ -40,9 +40,9 @@ fun Navigation(
       )
     }
     composable(
-      route = Screen.CharacterDetailScreen.route + "/{id}",
+      route = Screen.CharacterDetailScreen.route + "/{id-char}",
       arguments = listOf(
-        navArgument("id") {
+        navArgument("id-char") {
           type = NavType.IntType
           defaultValue = 0
 
@@ -51,7 +51,8 @@ fun Navigation(
     ) {
       CharacterDetailScreen(
         viewModel = characterViewModel,
-        id = it.arguments?.getInt("id"),
+        id = it.arguments?.getInt("id-char"),
+        context = context,
       )
     }
     composable(
@@ -65,15 +66,21 @@ fun Navigation(
       )
     }
     composable(
-      route = Screen.LocationDetailScreen.route + "/{id}",
+      route = Screen.LocationDetailScreen.route + "/{id-location}",
       arguments = listOf(
-        navArgument("id") {
+        navArgument("id-location") {
           type = NavType.IntType
           defaultValue = 0
         }
       )
     ) {
-      LocationDetailScreen(viewModel = locationViewModel, context = context)
+      LocationDetailScreen(
+        viewModel = locationViewModel,
+        context = context,
+        id = it.arguments?.getInt("id-location"),
+        navController = navController,
+        characterViewModel = characterViewModel
+      )
     }
   }
 }

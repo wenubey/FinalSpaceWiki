@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -24,10 +25,10 @@ import com.github.wenubey.finalspacewiki.presentation.util.Size
 @OptIn(ExperimentalMaterialApi::class, ExperimentalGlideComposeApi::class)
 @Composable
 fun CharacterListCard(
-    data: List<CharacterData>,
-    index: Int,
+    data: CharacterData,
     modifier: Modifier = Modifier,
     navController: NavController,
+    backgroundColor: Color = cardBackGroundColor,
 ) {
     val screenSize = Size()
     val screenHeight = screenSize.height()
@@ -36,10 +37,11 @@ fun CharacterListCard(
         modifier = modifier
             .padding(8.dp)
             .size(width = (screenWidth * 0.1).dp, height = (screenHeight * 0.18).dp),
-        backgroundColor = cardBackGroundColor,
+        backgroundColor = backgroundColor,
         shape = RoundedCornerShape(20.dp),
         onClick = {
-            navController.navigate(Screen.CharacterDetailScreen.route + "/${data[index].id}")
+            navController.navigate(Screen.CharacterDetailScreen.route + "/${data.id}")
+            println(Screen.CharacterDetailScreen.route + "/${data.id}")
         }
     ) {
         Column(
@@ -49,13 +51,13 @@ fun CharacterListCard(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             GlideImage(
-                model = data[index].img_url,
+                model = data.img_url,
                 contentDescription = null,
                 modifier = Modifier
                     .clip(RoundedCornerShape(16.dp))
             )
             Spacer(modifier = Modifier.height(8.dp))
-            Text(text = data[index].name, overflow = TextOverflow.Ellipsis)
+            Text(text = data.name, overflow = TextOverflow.Ellipsis)
         }
     }
 }

@@ -4,8 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Scaffold
-import androidx.compose.material3.ExperimentalMaterial3Api
-
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -15,14 +13,22 @@ import com.github.wenubey.finalspacewiki.presentation.features.character.Charact
 import com.github.wenubey.finalspacewiki.presentation.features.common.WikiTopBar
 import com.github.wenubey.finalspacewiki.presentation.features.location.LocationViewModel
 import com.github.wenubey.finalspacewiki.presentation.ui.theme.backGroundColor
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+@SuppressLint("CoroutineCreationDuringComposition", "UnusedMaterialScaffoldPaddingParameter")
 fun LocationDetailScreen(
   viewModel: LocationViewModel,
-  context: Context
+  characterViewModel: CharacterViewModel,
+  context: Context,
+  id: Int? = 0,
+  navController: NavController
 ) {
+  GlobalScope.launch {
+    viewModel.loadLocation(id!!)
+  }
   val openDialog = remember { mutableStateOf(false) }
   Scaffold(
     modifier = Modifier
@@ -31,8 +37,14 @@ fun LocationDetailScreen(
     topBar = {
       WikiTopBar(context = context, openDialog = openDialog)
     },
-    content = { padding ->
-
+    content = {
+      viewModel.locationDataState.data?.let { data ->
+        LocationDetailCard(
+          data = data,
+          navController = navController,
+          characterViewModel = characterViewModel
+        )
+      }
     }
   )
 }
