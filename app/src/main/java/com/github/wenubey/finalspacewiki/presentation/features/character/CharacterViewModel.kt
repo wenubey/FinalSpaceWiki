@@ -10,7 +10,7 @@ import com.github.wenubey.finalspacewiki.domain.model.CharacterData
 import com.github.wenubey.finalspacewiki.domain.util.Resource
 import com.github.wenubey.finalspacewiki.presentation.features.character.characterdetail.CharacterDataState
 import com.github.wenubey.finalspacewiki.presentation.features.character.characterlist.CharacterListDataState
-import com.github.wenubey.finalspacewiki.presentation.features.location.locationdetail.CharacterListForLocationDataState
+import com.github.wenubey.finalspacewiki.presentation.features.location.locationdetail.CharacterListForOtherScreenDataState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -28,7 +28,7 @@ class CharacterViewModel @Inject constructor(
   var characterDataState by mutableStateOf(CharacterDataState())
     private set
 
-  var characterListForLocationDataState by mutableStateOf(CharacterListForLocationDataState())
+  var characterListForOtherScreenDataState by mutableStateOf(CharacterListForOtherScreenDataState())
     private set
 
   var searchQuery = mutableStateOf("")
@@ -117,19 +117,19 @@ class CharacterViewModel @Inject constructor(
                 }
               }
               is Resource.Loading -> {
-                characterListForLocationDataState = characterListForLocationDataState.copy(
+                characterListForOtherScreenDataState = characterListForOtherScreenDataState.copy(
                   isLoading = result.isLoading
                 )
               }
               is Resource.Error -> {
-                characterListForLocationDataState = characterListForLocationDataState.copy(
+                characterListForOtherScreenDataState = characterListForOtherScreenDataState.copy(
                   error = result.message
                 )
               }
             }
           }
       }
-      characterListForLocationDataState = characterListForLocationDataState.copy(
+      characterListForOtherScreenDataState = characterListForOtherScreenDataState.copy(
         data = list
       )
     }
@@ -145,9 +145,11 @@ class CharacterViewModel @Inject constructor(
         .collect { result ->
           when (result) {
             is Resource.Success -> {
-              characterDataState = characterDataState.copy(
-                data = result.data
-              )
+              result.data?.let { data ->
+                characterDataState = characterDataState.copy(
+                  data = data
+                )
+              }
             }
             is Resource.Loading -> {
               characterDataState = characterDataState.copy(

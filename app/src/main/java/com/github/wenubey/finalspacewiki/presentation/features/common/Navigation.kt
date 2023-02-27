@@ -1,4 +1,4 @@
-package com.github.wenubey.finalspacewiki.presentation.util
+package com.github.wenubey.finalspacewiki.presentation.features.common
 
 import android.content.Context
 import androidx.compose.runtime.Composable
@@ -11,6 +11,8 @@ import com.github.wenubey.finalspacewiki.presentation.features.character.Charact
 import com.github.wenubey.finalspacewiki.presentation.features.character.characterdetail.CharacterDetailScreen
 import com.github.wenubey.finalspacewiki.presentation.features.character.characterlist.CharacterListDataState
 import com.github.wenubey.finalspacewiki.presentation.features.character.characterlist.CharacterListScreen
+import com.github.wenubey.finalspacewiki.presentation.features.episode.EpisodeViewModel
+import com.github.wenubey.finalspacewiki.presentation.features.episode.episodelist.EpisodeListDataState
 import com.github.wenubey.finalspacewiki.presentation.features.location.LocationViewModel
 import com.github.wenubey.finalspacewiki.presentation.features.location.locationdetail.LocationDetailScreen
 import com.github.wenubey.finalspacewiki.presentation.features.location.locationlist.LocationListDataState
@@ -20,8 +22,10 @@ import com.github.wenubey.finalspacewiki.presentation.features.location.location
 fun Navigation(
   characterListDataState: CharacterListDataState,
   locationListDataState: LocationListDataState,
+  episodeListDataState: EpisodeListDataState,
   characterViewModel: CharacterViewModel,
   locationViewModel: LocationViewModel,
+  episodeViewModel: EpisodeViewModel,
   context: Context,
 ) {
   val navController = rememberNavController()
@@ -81,6 +85,11 @@ fun Navigation(
         navController = navController,
         characterViewModel = characterViewModel
       )
+    }
+    composable(
+      route = Screen.EpisodeListScreen.route
+    ) {
+
     }
   }
 }

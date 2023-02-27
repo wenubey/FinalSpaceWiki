@@ -3,10 +3,8 @@ package com.github.wenubey.finalspacewiki.presentation.features.location.locatio
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
@@ -20,14 +18,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
-import com.github.wenubey.finalspacewiki.domain.model.CharacterData
 import com.github.wenubey.finalspacewiki.domain.model.LocationData
 import com.github.wenubey.finalspacewiki.presentation.features.character.CharacterViewModel
-import com.github.wenubey.finalspacewiki.presentation.features.character.characterdetail.CharacterDetailCard
 import com.github.wenubey.finalspacewiki.presentation.features.character.characterlist.CharacterListCard
-import com.github.wenubey.finalspacewiki.presentation.features.character.characterlist.CharacterListDataState
 import com.github.wenubey.finalspacewiki.presentation.ui.theme.appBarColor
-import com.github.wenubey.finalspacewiki.presentation.ui.theme.backGroundColor
 import com.github.wenubey.finalspacewiki.presentation.ui.theme.cardBackGroundColor
 import com.github.wenubey.finalspacewiki.presentation.util.toIntList
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -89,7 +83,7 @@ fun LocationDetailCard(
       LazyVerticalGrid(
         columns = GridCells.Fixed(3),
         content = {
-        characterViewModel.characterListForLocationDataState.data?.let { characters ->
+        characterViewModel.characterListForOtherScreenDataState.data?.let { characters ->
           items(characters.size) {index ->
             CharacterListCard(
               data = characters[index],

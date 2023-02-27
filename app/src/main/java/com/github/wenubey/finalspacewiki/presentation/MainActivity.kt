@@ -7,7 +7,7 @@ import androidx.activity.viewModels
 import com.github.wenubey.finalspacewiki.presentation.features.character.CharacterViewModel
 import com.github.wenubey.finalspacewiki.presentation.features.location.LocationViewModel
 import com.github.wenubey.finalspacewiki.presentation.ui.theme.FinalSpaceWikiTheme
-import com.github.wenubey.finalspacewiki.presentation.util.Navigation
+import com.github.wenubey.finalspacewiki.presentation.features.common.Navigation
 import dagger.hilt.android.AndroidEntryPoint
 
 

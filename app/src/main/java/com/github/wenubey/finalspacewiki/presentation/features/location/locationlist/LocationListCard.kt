@@ -17,7 +17,7 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.github.wenubey.finalspacewiki.domain.model.LocationData
 import com.github.wenubey.finalspacewiki.presentation.ui.theme.cardBackGroundColor
-import com.github.wenubey.finalspacewiki.presentation.util.Screen
+import com.github.wenubey.finalspacewiki.presentation.features.common.Screen
 import com.github.wenubey.finalspacewiki.presentation.util.Size
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalGlideComposeApi::class)
@@ -52,7 +52,7 @@ fun LocationListCard(
         contentScale = ContentScale.FillBounds,
         contentDescription = data[index].name,
         modifier = Modifier
-          .size(height = (screenHeight *0.24).dp, width = screenWidth.dp,)
+          .size(height = (screenHeight *0.23).dp, width = screenWidth.dp,)
           .clip(RoundedCornerShape(16.dp))
       )
       Text(text = data[index].name, overflow = TextOverflow.Ellipsis)
