@@ -6,7 +6,9 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.wenubey.finalspacewiki.data.repository.WikiRepository
+import com.github.wenubey.finalspacewiki.domain.model.CharacterData
 import com.github.wenubey.finalspacewiki.domain.util.Resource
+import com.github.wenubey.finalspacewiki.presentation.features.location.locationdetail.CharacterListForLocationDataState
 import com.github.wenubey.finalspacewiki.presentation.features.location.locationdetail.LocationDataState
 import com.github.wenubey.finalspacewiki.presentation.features.location.locationlist.LocationListDataState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,6 +26,9 @@ class LocationViewModel @Inject constructor(
     private set
 
   var locationListDataState by mutableStateOf(LocationListDataState())
+    private set
+
+  var characterListForLocationDataState by mutableStateOf(CharacterListForLocationDataState())
     private set
 
   var searchQuery = mutableStateOf("")
@@ -123,6 +128,39 @@ class LocationViewModel @Inject constructor(
             }
           }
         }
+    }
+  }
+
+  fun loadCharactersListForLocation(
+    idList: List<Int>
+  ) {
+    viewModelScope.launch {
+      val list = mutableListOf<CharacterData>()
+      idList.forEach { id ->
+        repository.getCharacterData(id = id)
+          .collect { result ->
+            when (result) {
+              is Resource.Success -> {
+                result.data?.let {
+                  list.add(it)
+                }
+              }
+              is Resource.Loading -> {
+                characterListForLocationDataState = characterListForLocationDataState.copy(
+                  isLoading = result.isLoading
+                )
+              }
+              is Resource.Error -> {
+                characterListForLocationDataState = characterListForLocationDataState.copy(
+                  error = result.message
+                )
+              }
+            }
+          }
+      }
+      characterListForLocationDataState = characterListForLocationDataState.copy(
+        data = list
+      )
     }
   }
 }

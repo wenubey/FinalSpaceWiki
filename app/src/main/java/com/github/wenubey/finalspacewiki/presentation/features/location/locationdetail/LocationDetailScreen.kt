@@ -1,3 +1,5 @@
+@file:OptIn(DelicateCoroutinesApi::class)
+
 package com.github.wenubey.finalspacewiki.presentation.features.location.locationdetail
 
 import android.annotation.SuppressLint
@@ -13,6 +15,7 @@ import com.github.wenubey.finalspacewiki.presentation.features.character.Charact
 import com.github.wenubey.finalspacewiki.presentation.features.common.WikiTopBar
 import com.github.wenubey.finalspacewiki.presentation.features.location.LocationViewModel
 import com.github.wenubey.finalspacewiki.presentation.ui.theme.backGroundColor
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -21,7 +24,6 @@ import kotlinx.coroutines.launch
 @SuppressLint("CoroutineCreationDuringComposition", "UnusedMaterialScaffoldPaddingParameter")
 fun LocationDetailScreen(
   viewModel: LocationViewModel,
-  characterViewModel: CharacterViewModel,
   context: Context,
   id: Int? = 0,
   navController: NavController
@@ -42,7 +44,7 @@ fun LocationDetailScreen(
         LocationDetailCard(
           data = data,
           navController = navController,
-          characterViewModel = characterViewModel
+          locationViewModel = viewModel
         )
       }
     }

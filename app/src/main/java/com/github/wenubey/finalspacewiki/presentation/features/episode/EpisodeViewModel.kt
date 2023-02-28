@@ -5,17 +5,17 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.room.Query
 import com.github.wenubey.finalspacewiki.data.repository.WikiRepository
+import com.github.wenubey.finalspacewiki.domain.model.CharacterData
 import com.github.wenubey.finalspacewiki.domain.model.EpisodeData
 import com.github.wenubey.finalspacewiki.domain.util.Resource
+import com.github.wenubey.finalspacewiki.presentation.features.episode.episodedetail.CharacterListForEpisodeDataState
 import com.github.wenubey.finalspacewiki.presentation.features.episode.episodedetail.EpisodeDataState
 import com.github.wenubey.finalspacewiki.presentation.features.episode.episodelist.EpisodeListDataState
-import com.github.wenubey.finalspacewiki.presentation.features.location.locationdetail.CharacterListForOtherScreenDataState
+import com.github.wenubey.finalspacewiki.presentation.features.location.locationdetail.CharacterListForLocationDataState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -30,7 +30,7 @@ class EpisodeViewModel @Inject constructor(
   var episodeListDataState by mutableStateOf(EpisodeListDataState())
     private set
 
-  var characterListForOtherScreenDataState by mutableStateOf(CharacterListForOtherScreenDataState())
+  var characterListForEpisodeDataState by mutableStateOf(CharacterListForEpisodeDataState())
     private set
 
   var searchQuery = mutableStateOf("")
@@ -139,9 +139,9 @@ class EpisodeViewModel @Inject constructor(
     idList: List<Int>
   ) {
     viewModelScope.launch {
-      val list = mutableListOf<EpisodeData>()
+      val list = mutableListOf<CharacterData>()
       idList.forEach { id ->
-        repository.getEpisodeData(id = id)
+        repository.getCharacterData(id = id)
           .collect { result ->
             when(result) {
               is Resource.Success -> {
@@ -150,16 +150,21 @@ class EpisodeViewModel @Inject constructor(
                 }
               }
               is Resource.Loading -> {
-                characterListForOtherScreenDataState = characterListForOtherScreenDataState.copy(
+                characterListForEpisodeDataState = characterListForEpisodeDataState.copy(
                   isLoading = result.isLoading
                 )
               }
               is Resource.Error -> {
-
+                characterListForEpisodeDataState = characterListForEpisodeDataState.copy(
+                  error = result.message
+                )
               }
             }
           }
       }
+      characterListForEpisodeDataState = characterListForEpisodeDataState.copy(
+        data = list
+      )
     }
   }
 

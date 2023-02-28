@@ -12,7 +12,9 @@ import com.github.wenubey.finalspacewiki.presentation.features.character.charact
 import com.github.wenubey.finalspacewiki.presentation.features.character.characterlist.CharacterListDataState
 import com.github.wenubey.finalspacewiki.presentation.features.character.characterlist.CharacterListScreen
 import com.github.wenubey.finalspacewiki.presentation.features.episode.EpisodeViewModel
+import com.github.wenubey.finalspacewiki.presentation.features.episode.episodedetail.EpisodeDetailScreen
 import com.github.wenubey.finalspacewiki.presentation.features.episode.episodelist.EpisodeListDataState
+import com.github.wenubey.finalspacewiki.presentation.features.episode.episodelist.EpisodeListScreen
 import com.github.wenubey.finalspacewiki.presentation.features.location.LocationViewModel
 import com.github.wenubey.finalspacewiki.presentation.features.location.locationdetail.LocationDetailScreen
 import com.github.wenubey.finalspacewiki.presentation.features.location.locationlist.LocationListDataState
@@ -83,13 +85,33 @@ fun Navigation(
         context = context,
         id = it.arguments?.getInt("id-location"),
         navController = navController,
-        characterViewModel = characterViewModel
       )
     }
     composable(
       route = Screen.EpisodeListScreen.route
     ) {
-
+      EpisodeListScreen(
+        context = context,
+        state = episodeListDataState,
+        navController = navController,
+        viewModel = episodeViewModel,
+      )
+    }
+    composable(
+      route = Screen.EpisodeDetailScreen.route + "/{id-episode}",
+      arguments = listOf(
+        navArgument("id-episode") {
+          type = NavType.IntType
+          defaultValue = 0
+        }
+      )
+    ) {
+      EpisodeDetailScreen(
+        viewModel = episodeViewModel,
+        context = context,
+        id = it.arguments?.getInt("id-episode"),
+        navController = navController
+      )
     }
   }
 }

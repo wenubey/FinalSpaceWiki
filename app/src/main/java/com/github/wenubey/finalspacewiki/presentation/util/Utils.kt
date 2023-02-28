@@ -57,8 +57,11 @@ fun List<String>.toIntList() : List<Int> {
     val list = mutableListOf<Int>()
     this.forEach { data ->
         list.add(
-            data.last().digitToInt()
+            data.substringAfterLast("/").toInt()
         )
     }
     return list
 }
+
+fun String.addCharAtIndex(char: Char, index: Int) =
+    StringBuilder(this).apply { insert(index, char) }.toString()

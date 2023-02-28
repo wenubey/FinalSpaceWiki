@@ -3,6 +3,7 @@ package com.github.wenubey.finalspacewiki.data.mapper
 import com.github.wenubey.finalspacewiki.data.local.entities.EpisodeDataEntity
 import com.github.wenubey.finalspacewiki.data.remote.EpisodeDataDto
 import com.github.wenubey.finalspacewiki.domain.model.EpisodeData
+import com.github.wenubey.finalspacewiki.presentation.util.addCharAtIndex
 
 fun EpisodeDataDto.toEpisodeData(): EpisodeData {
   return EpisodeData(
@@ -36,6 +37,6 @@ fun EpisodeDataEntity.toEpisodeData(): EpisodeData {
     director = director,
     writer = writer,
     characters = characters,
-    img_url = img_url
+    img_url = img_url.addCharAtIndex(index = 4, char = 's')
   )
 }

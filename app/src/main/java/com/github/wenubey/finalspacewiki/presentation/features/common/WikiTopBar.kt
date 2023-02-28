@@ -4,7 +4,10 @@ import android.content.Context
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -13,6 +16,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -31,11 +35,13 @@ fun WikiTopBar(
     title = {
       Text(
         text = stringResource(R.string.app_bar_title),
-        modifier = Modifier.padding(8.dp)
+        modifier = Modifier.padding(8.dp),
+        style = MaterialTheme.typography.h1,
       )
     },
     modifier = Modifier
-      .fillMaxWidth(),
+      .fillMaxWidth()
+      .clip(AbsoluteRoundedCornerShape(topLeft = 0.dp, topRight = 0.dp, bottomLeft = 16.dp, bottomRight = 16.dp)),
     colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
       containerColor = appBarColor
     ),

@@ -1,6 +1,5 @@
 package com.github.wenubey.finalspacewiki.presentation.ui.theme
 
-import androidx.compose.material.Text
 import androidx.compose.material.Typography
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
@@ -25,12 +24,12 @@ val Typography = Typography(
     h1 = TextStyle(
         fontFamily = vt323,
         fontWeight = FontWeight.Bold,
-        fontSize = 24.sp,
+        fontSize = 28.sp,
         color = Color.White,
     ),
     h2 = TextStyle(
         fontFamily = vt323,
-        fontWeight = FontWeight.Bold,
+        fontWeight = FontWeight.Normal,
         fontSize = 20.sp,
         color = Color.White
     )

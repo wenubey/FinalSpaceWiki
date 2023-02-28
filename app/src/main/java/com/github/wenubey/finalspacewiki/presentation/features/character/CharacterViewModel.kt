@@ -10,7 +10,7 @@ import com.github.wenubey.finalspacewiki.domain.model.CharacterData
 import com.github.wenubey.finalspacewiki.domain.util.Resource
 import com.github.wenubey.finalspacewiki.presentation.features.character.characterdetail.CharacterDataState
 import com.github.wenubey.finalspacewiki.presentation.features.character.characterlist.CharacterListDataState
-import com.github.wenubey.finalspacewiki.presentation.features.location.locationdetail.CharacterListForOtherScreenDataState
+import com.github.wenubey.finalspacewiki.presentation.features.location.locationdetail.CharacterListForLocationDataState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -26,9 +26,6 @@ class CharacterViewModel @Inject constructor(
     private set
 
   var characterDataState by mutableStateOf(CharacterDataState())
-    private set
-
-  var characterListForOtherScreenDataState by mutableStateOf(CharacterListForOtherScreenDataState())
     private set
 
   var searchQuery = mutableStateOf("")
@@ -102,38 +99,7 @@ class CharacterViewModel @Inject constructor(
     }
   }
 
-  fun loadCharactersListForLocation(
-    idList: List<Int>
-  ) {
-    viewModelScope.launch {
-      val list = mutableListOf<CharacterData>()
-      idList.forEach { id ->
-        repository.getCharacterData(id = id)
-          .collect { result ->
-            when (result) {
-              is Resource.Success -> {
-                result.data?.let {
-                  list.add(it)
-                }
-              }
-              is Resource.Loading -> {
-                characterListForOtherScreenDataState = characterListForOtherScreenDataState.copy(
-                  isLoading = result.isLoading
-                )
-              }
-              is Resource.Error -> {
-                characterListForOtherScreenDataState = characterListForOtherScreenDataState.copy(
-                  error = result.message
-                )
-              }
-            }
-          }
-      }
-      characterListForOtherScreenDataState = characterListForOtherScreenDataState.copy(
-        data = list
-      )
-    }
-  }
+
 
   fun loadCharacter(
     id: Int,

@@ -26,7 +26,7 @@ fun CharacterList(
         Column(
             modifier = Modifier
                 .padding(8.dp)
-                .size(width = screenWidth.dp, height = (screenHeight * 0.85).dp)
+                .size(width = screenWidth.dp, height = (screenHeight * 0.82).dp)
         ) {
             WikiSearchBar(value = viewModel.searchQuery.value, onValueChange = viewModel::onSearch)
             Spacer(modifier = Modifier.padding(bottom = 10.dp))

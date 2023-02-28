@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.AbsoluteRoundedCornerShape
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.MaterialTheme
@@ -17,6 +18,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -34,7 +36,8 @@ fun WikiNavBar(
 
   val items = listOf(
     WikiNavBarItem.CharacterList,
-    WikiNavBarItem.LocationList
+    WikiNavBarItem.LocationList,
+    WikiNavBarItem.EpisodeList,
   )
   val screenSize = Size()
   val screenHeight = screenSize.height()
@@ -45,7 +48,8 @@ fun WikiNavBar(
       .size(
         width = screenWidth.dp,
         height = (screenHeight * 0.07).dp,
-      ),
+      )
+      .clip(AbsoluteRoundedCornerShape(topLeft = 16.dp, topRight = 16.dp, bottomLeft = 16.dp, bottomRight = 16.dp)),
     backgroundColor = appBarColor,
     contentColor = Color.White,
   ) {

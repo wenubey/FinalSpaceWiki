@@ -1,4 +1,4 @@
-package com.github.wenubey.finalspacewiki.presentation.features.location.locationlist
+package com.github.wenubey.finalspacewiki.presentation.features.episode.episodelist
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -7,23 +7,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.github.wenubey.finalspacewiki.presentation.features.common.WikiNavBar
 import com.github.wenubey.finalspacewiki.presentation.features.common.WikiSearchBar
-import com.github.wenubey.finalspacewiki.presentation.features.location.LocationViewModel
+import com.github.wenubey.finalspacewiki.presentation.features.episode.EpisodeViewModel
+import com.github.wenubey.finalspacewiki.presentation.features.location.locationlist.LocationListCard
 import com.github.wenubey.finalspacewiki.presentation.util.Size
 
 @Composable
-fun LocationList(
-  state: LocationListDataState,
+fun EpisodeList(
+  state: EpisodeListDataState,
   navController: NavController,
-  viewModel: LocationViewModel,
+  viewModel: EpisodeViewModel,
 ) {
   val screenSize = Size()
   val screenHeight = screenSize.height()
   val screenWidth = screenSize.width()
-  state.locations?.let { data ->
+  state.data?.let { data ->
     Column(
-      modifier =Modifier
+      modifier = Modifier
         .padding(8.dp)
         .size(width = screenWidth.dp, height = (screenHeight * 0.82).dp)
     ) {
@@ -34,7 +34,7 @@ fun LocationList(
         columns = GridCells.Fixed(1),
         content = {
           items(data.size) { index ->
-            LocationListCard(
+            EpisodeListCard(
               data = data,
               index = index,
               navController = navController,
