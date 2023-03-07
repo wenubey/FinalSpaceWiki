@@ -41,39 +41,6 @@ class LocationViewModel @Inject constructor(
     loadLocationsList(true)
   }
 
-  //TODO: change onSearch to onEvent add swipe refresh functionality
-  fun onSearch(query: String) {
-    searchQuery.value = query
-    searchJob?.cancel()
-    searchJob = viewModelScope.launch {
-      delay(500L)
-      repository.getLocationsData(true)
-        .collect { result ->
-          when (result) {
-            is Resource.Success -> {
-              result.data?.let { locations ->
-                locationListDataState = locationListDataState.copy(
-                  locations = locations.filter {
-                    it.name.contains(query, ignoreCase = true)
-                  }
-                )
-              }
-            }
-            is Resource.Error -> {
-              locationListDataState = locationListDataState.copy(
-                error = result.message
-              )
-            }
-            is Resource.Loading -> {
-              locationListDataState = locationListDataState.copy(
-                isLoading = result.isLoading
-              )
-            }
-          }
-        }
-    }
-  }
-
   fun onEvent(event: LocationListEvent) {
     when (event) {
       is LocationListEvent.Refresh -> {

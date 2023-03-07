@@ -37,7 +37,12 @@ fun LocationList(
           .padding(8.dp)
           .size(width = screenWidth.dp, height = (screenHeight * 0.85).dp)
       ) {
-        WikiSearchBar(value = viewModel.searchQuery.value, onValueChange = viewModel::onSearch)
+        WikiSearchBar(
+          value = viewModel.searchQuery.value,
+          onValueChange = {
+            viewModel.onEvent(LocationListEvent.OnSearchQueryChanged(it))
+          }
+        )
         Spacer(modifier = Modifier.height(4.dp))
         LazyVerticalGrid(
           modifier = Modifier.size(width = screenWidth.dp, height = (screenHeight * 1).dp),
