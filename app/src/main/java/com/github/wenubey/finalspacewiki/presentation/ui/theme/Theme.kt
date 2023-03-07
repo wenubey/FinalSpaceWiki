@@ -1,10 +1,8 @@
 package com.github.wenubey.finalspacewiki.presentation.ui.theme
 
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.TextFieldColors
 import androidx.compose.runtime.Composable
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-
 
 @Composable
 fun FinalSpaceWikiTheme(

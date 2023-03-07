@@ -7,12 +7,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.wenubey.finalspacewiki.data.repository.WikiRepository
 import com.github.wenubey.finalspacewiki.domain.model.CharacterData
-import com.github.wenubey.finalspacewiki.domain.model.EpisodeData
 import com.github.wenubey.finalspacewiki.domain.util.Resource
-import com.github.wenubey.finalspacewiki.presentation.features.episode.episodedetail.CharacterListForEpisodeDataState
-import com.github.wenubey.finalspacewiki.presentation.features.episode.episodedetail.EpisodeDataState
-import com.github.wenubey.finalspacewiki.presentation.features.episode.episodelist.EpisodeListDataState
-import com.github.wenubey.finalspacewiki.presentation.features.location.locationdetail.CharacterListForLocationDataState
+import com.github.wenubey.finalspacewiki.presentation.features.episode.episode_detail.CharacterListForEpisodeDataState
+import com.github.wenubey.finalspacewiki.presentation.features.episode.episode_detail.EpisodeDataState
+import com.github.wenubey.finalspacewiki.presentation.features.episode.episode_list.EpisodeListDataState
+import com.github.wenubey.finalspacewiki.presentation.features.episode.episode_list.EpisodeListEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -42,35 +41,42 @@ class EpisodeViewModel @Inject constructor(
     loadEpisodesList(true)
   }
 
-  fun onSearch(query: String) {
-    searchQuery.value = query
-    searchJob?.cancel()
-    searchJob = viewModelScope.launch {
-      delay(500L)
-      repository.getEpisodesData(true)
-        .collect { result ->
-          when (result) {
-            is Resource.Success -> {
-              result.data?.let { episodes ->
-                episodeListDataState = episodeListDataState.copy(
-                  data = episodes.filter {
-                    it.name.contains(query, ignoreCase = true)
+  fun onEvent(event: EpisodeListEvent) {
+    when(event) {
+      is EpisodeListEvent.Refresh -> {
+        loadEpisodesList(true)
+      }
+      is EpisodeListEvent.OnSearchQueryChange -> {
+        searchQuery.value = event.query
+        searchJob?.cancel()
+        searchJob = viewModelScope.launch {
+          delay(500L)
+          repository.getEpisodesData(true)
+            .collect { result ->
+              when (result) {
+                is Resource.Success -> {
+                  result.data?.let { episodes ->
+                    episodeListDataState = episodeListDataState.copy(
+                      data = episodes.filter {
+                        it.name.contains(event.query, ignoreCase = true)
+                      }
+                    )
                   }
-                )
+                }
+                is Resource.Loading -> {
+                  episodeListDataState = episodeListDataState.copy(
+                    isLoading = result.isLoading
+                  )
+                }
+                is Resource.Error -> {
+                  episodeListDataState = episodeListDataState.copy(
+                    error = result.message
+                  )
+                }
               }
             }
-            is Resource.Loading -> {
-              episodeListDataState = episodeListDataState.copy(
-                isLoading = result.isLoading
-              )
-            }
-            is Resource.Error -> {
-              episodeListDataState = episodeListDataState.copy(
-                error = result.message
-              )
-            }
-          }
         }
+      }
     }
   }
 

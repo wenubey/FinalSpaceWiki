@@ -12,7 +12,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.github.wenubey.finalspacewiki.R
-import com.github.wenubey.finalspacewiki.presentation.features.location.LocationViewModel
 import com.github.wenubey.finalspacewiki.presentation.ui.theme.appBarColor
 import com.github.wenubey.finalspacewiki.presentation.ui.theme.cardBackGroundColor
 

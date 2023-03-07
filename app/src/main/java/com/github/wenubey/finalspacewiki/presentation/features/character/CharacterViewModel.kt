@@ -6,11 +6,10 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.wenubey.finalspacewiki.data.repository.WikiRepository
-import com.github.wenubey.finalspacewiki.domain.model.CharacterData
 import com.github.wenubey.finalspacewiki.domain.util.Resource
-import com.github.wenubey.finalspacewiki.presentation.features.character.characterdetail.CharacterDataState
-import com.github.wenubey.finalspacewiki.presentation.features.character.characterlist.CharacterListDataState
-import com.github.wenubey.finalspacewiki.presentation.features.location.locationdetail.CharacterListForLocationDataState
+import com.github.wenubey.finalspacewiki.presentation.features.character.character_detail.CharacterDataState
+import com.github.wenubey.finalspacewiki.presentation.features.character.character_list.CharacterListDataState
+import com.github.wenubey.finalspacewiki.presentation.features.character.character_list.CharacterListEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -37,35 +36,42 @@ class CharacterViewModel @Inject constructor(
     loadCharactersList(true)
   }
 
-  fun onSearch(query: String) {
-    searchQuery.value = query
-    searchJob?.cancel()
-    searchJob = viewModelScope.launch {
-      delay(500L)
-      repository.getCharactersData(true)
-        .collect { result ->
-          when (result) {
-            is Resource.Success -> {
-              result.data?.let { characters ->
-                characterListDataState = characterListDataState.copy(
-                  characters = characters.filter {
-                    it.name.contains(query, ignoreCase = true)
+  fun onEvent(event: CharacterListEvent) {
+    when (event) {
+      is CharacterListEvent.Refresh -> {
+        loadCharactersList(true)
+      }
+      is CharacterListEvent.OnSearchQueryChange -> {
+        searchQuery.value = event.query
+        searchJob?.cancel()
+        searchJob = viewModelScope.launch {
+          delay(500L)
+          repository.getCharactersData(true)
+            .collect { result ->
+              when (result) {
+                is Resource.Success -> {
+                  result.data?.let { characters ->
+                    characterListDataState = characterListDataState.copy(
+                      characters = characters.filter {
+                        it.name.contains(event.query, ignoreCase = true)
+                      }
+                    )
                   }
-                )
+                }
+                is Resource.Error -> {
+                  characterListDataState = characterListDataState.copy(
+                    error = result.message
+                  )
+                }
+                is Resource.Loading -> {
+                  characterListDataState = characterListDataState.copy(
+                    isLoading = result.isLoading
+                  )
+                }
               }
             }
-            is Resource.Error -> {
-              characterListDataState = characterListDataState.copy(
-                error = result.message
-              )
-            }
-            is Resource.Loading -> {
-              characterListDataState = characterListDataState.copy(
-                isLoading = result.isLoading
-              )
-            }
-          }
         }
+      }
     }
   }
 
@@ -98,7 +104,6 @@ class CharacterViewModel @Inject constructor(
         }
     }
   }
-
 
 
   fun loadCharacter(

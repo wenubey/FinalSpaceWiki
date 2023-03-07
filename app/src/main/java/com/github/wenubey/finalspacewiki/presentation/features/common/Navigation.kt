@@ -8,17 +8,17 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.github.wenubey.finalspacewiki.presentation.features.character.CharacterViewModel
-import com.github.wenubey.finalspacewiki.presentation.features.character.characterdetail.CharacterDetailScreen
-import com.github.wenubey.finalspacewiki.presentation.features.character.characterlist.CharacterListDataState
-import com.github.wenubey.finalspacewiki.presentation.features.character.characterlist.CharacterListScreen
+import com.github.wenubey.finalspacewiki.presentation.features.character.character_detail.CharacterDetailScreen
+import com.github.wenubey.finalspacewiki.presentation.features.character.character_list.CharacterListDataState
+import com.github.wenubey.finalspacewiki.presentation.features.character.character_list.CharacterListScreen
 import com.github.wenubey.finalspacewiki.presentation.features.episode.EpisodeViewModel
-import com.github.wenubey.finalspacewiki.presentation.features.episode.episodedetail.EpisodeDetailScreen
-import com.github.wenubey.finalspacewiki.presentation.features.episode.episodelist.EpisodeListDataState
-import com.github.wenubey.finalspacewiki.presentation.features.episode.episodelist.EpisodeListScreen
+import com.github.wenubey.finalspacewiki.presentation.features.episode.episode_detail.EpisodeDetailScreen
+import com.github.wenubey.finalspacewiki.presentation.features.episode.episode_list.EpisodeListDataState
+import com.github.wenubey.finalspacewiki.presentation.features.episode.episode_list.EpisodeListScreen
 import com.github.wenubey.finalspacewiki.presentation.features.location.LocationViewModel
-import com.github.wenubey.finalspacewiki.presentation.features.location.locationdetail.LocationDetailScreen
-import com.github.wenubey.finalspacewiki.presentation.features.location.locationlist.LocationListDataState
-import com.github.wenubey.finalspacewiki.presentation.features.location.locationlist.LocationListScreen
+import com.github.wenubey.finalspacewiki.presentation.features.location.location_detail.LocationDetailScreen
+import com.github.wenubey.finalspacewiki.presentation.features.location.location_list.LocationListDataState
+import com.github.wenubey.finalspacewiki.presentation.features.location.location_list.LocationListScreen
 
 @Composable
 fun Navigation(
@@ -39,8 +39,7 @@ fun Navigation(
       route = Screen.CharacterListScreen.route
     ) {
       CharacterListScreen(
-        state = characterListDataState,
-        navController,
+        navController = navController,
         viewModel = characterViewModel,
         context = context
       )
@@ -67,7 +66,6 @@ fun Navigation(
       LocationListScreen(
         context = context,
         navController = navController,
-        state = locationListDataState,
         viewModel = locationViewModel,
       )
     }
@@ -92,7 +90,6 @@ fun Navigation(
     ) {
       EpisodeListScreen(
         context = context,
-        state = episodeListDataState,
         navController = navController,
         viewModel = episodeViewModel,
       )

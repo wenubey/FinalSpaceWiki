@@ -8,9 +8,10 @@ import androidx.lifecycle.viewModelScope
 import com.github.wenubey.finalspacewiki.data.repository.WikiRepository
 import com.github.wenubey.finalspacewiki.domain.model.CharacterData
 import com.github.wenubey.finalspacewiki.domain.util.Resource
-import com.github.wenubey.finalspacewiki.presentation.features.location.locationdetail.CharacterListForLocationDataState
-import com.github.wenubey.finalspacewiki.presentation.features.location.locationdetail.LocationDataState
-import com.github.wenubey.finalspacewiki.presentation.features.location.locationlist.LocationListDataState
+import com.github.wenubey.finalspacewiki.presentation.features.location.location_detail.CharacterListForLocationDataState
+import com.github.wenubey.finalspacewiki.presentation.features.location.location_detail.LocationDataState
+import com.github.wenubey.finalspacewiki.presentation.features.location.location_list.LocationListDataState
+import com.github.wenubey.finalspacewiki.presentation.features.location.location_list.LocationListEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -40,7 +41,7 @@ class LocationViewModel @Inject constructor(
     loadLocationsList(true)
   }
 
-
+  //TODO: change onSearch to onEvent add swipe refresh functionality
   fun onSearch(query: String) {
     searchQuery.value = query
     searchJob?.cancel()
@@ -48,9 +49,9 @@ class LocationViewModel @Inject constructor(
       delay(500L)
       repository.getLocationsData(true)
         .collect { result ->
-          when(result) {
+          when (result) {
             is Resource.Success -> {
-              result.data?.let { locations->
+              result.data?.let { locations ->
                 locationListDataState = locationListDataState.copy(
                   locations = locations.filter {
                     it.name.contains(query, ignoreCase = true)
@@ -70,6 +71,45 @@ class LocationViewModel @Inject constructor(
             }
           }
         }
+    }
+  }
+
+  fun onEvent(event: LocationListEvent) {
+    when (event) {
+      is LocationListEvent.Refresh -> {
+        loadLocationsList(true)
+      }
+      is LocationListEvent.OnSearchQueryChanged -> {
+        searchQuery.value = event.query
+        searchJob?.cancel()
+        searchJob = viewModelScope.launch {
+          delay(500L)
+          repository.getLocationsData(true)
+            .collect { result ->
+              when (result) {
+                is Resource.Success -> {
+                  result.data?.let { locations ->
+                    locationListDataState = locationListDataState.copy(
+                      locations = locations.filter {
+                        it.name.contains(event.query, ignoreCase = true)
+                      }
+                    )
+                  }
+                }
+                is Resource.Error -> {
+                  locationListDataState = locationListDataState.copy(
+                    error = result.message
+                  )
+                }
+                is Resource.Loading -> {
+                  locationListDataState = locationListDataState.copy(
+                    isLoading = result.isLoading
+                  )
+                }
+              }
+            }
+        }
+      }
     }
   }
 
@@ -110,7 +150,7 @@ class LocationViewModel @Inject constructor(
       repository
         .getLocationData(id = id, fetchFromRemote = fetchFromRemote)
         .collect { result ->
-          when(result) {
+          when (result) {
             is Resource.Success -> {
               locationDataState = locationDataState.copy(
                 data = result.data

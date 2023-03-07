@@ -1,7 +1,6 @@
 package com.github.wenubey.finalspacewiki.presentation.util
 
 import android.content.Context
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.AnnotatedString
@@ -50,6 +49,11 @@ fun createCopyRightString(context: Context): AnnotatedString {
         }
         pop()
         append(context.getString(R.string.copyright_third))
+        append(context.getString(R.string.copyright_fourth))
+        pushStringAnnotation("FLAT_ICON", annotation = "https://www.flaticon.com")
+        withStyle(style = SpanStyle(color = cardBackGroundColor, fontSize = 20.sp)) {
+            append(context.getString(R.string.flat_icon))
+        }
     }
 }
 

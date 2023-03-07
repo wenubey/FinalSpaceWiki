@@ -11,8 +11,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalUriHandler
@@ -58,6 +56,11 @@ fun CustomAlertDialog(
               }
             createCopyRightString(context)
               .getStringAnnotations("ADULT_SWIM", offset, offset)
+              .firstOrNull()?.let { link ->
+                uriHandler.openUri(link.item)
+              }
+            createCopyRightString(context)
+              .getStringAnnotations("FLAT_ICON", offset, offset)
               .firstOrNull()?.let { link ->
                 uriHandler.openUri(link.item)
               }

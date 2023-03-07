@@ -13,4 +13,6 @@
     <string name="copyright_second">  and later picked by  </string>
     <string name="adult_swim"> Adult Swim. </string>
     <string name="copyright_third">The data and images are used without claim of ownership and belong to their respective owners. I do not own the rights to any material provided in this API.</string>
+    <string name="flat_icon">Flat Icon</string>
+    <string name="copyright_fourth">"Some icons I used from "</string>
 </resources>
