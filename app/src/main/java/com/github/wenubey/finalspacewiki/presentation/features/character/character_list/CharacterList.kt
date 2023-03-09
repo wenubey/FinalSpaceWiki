@@ -43,7 +43,8 @@ fun CharacterList(
           value = viewModel.searchQuery.value,
           onValueChange = {
             viewModel.onEvent(CharacterListEvent.OnSearchQueryChange(it))
-          }
+          },
+          hintText = "Search Character",
         )
         Spacer(modifier = Modifier.padding(bottom = 10.dp))
         LazyVerticalGrid(

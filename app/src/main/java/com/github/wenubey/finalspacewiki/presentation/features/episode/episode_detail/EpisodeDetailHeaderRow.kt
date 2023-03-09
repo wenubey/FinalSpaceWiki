@@ -9,8 +9,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.github.wenubey.finalspacewiki.R
+import com.github.wenubey.finalspacewiki.presentation.util.newLineAfterThirdWord
 
 @Composable
 fun EpisodeDetailHeaderRow(
@@ -22,9 +24,9 @@ fun EpisodeDetailHeaderRow(
       .fillMaxWidth()
       .padding(PaddingValues(start = 8.dp, end = 8.dp)),
     horizontalArrangement = Arrangement.SpaceBetween,
-    verticalAlignment = Alignment.CenterVertically
+    verticalAlignment = Alignment.Top
   ) {
-    Text(text = chapterName, style = MaterialTheme.typography.h1)
+    Text(text = chapterName.newLineAfterThirdWord(), style = MaterialTheme.typography.h1)
     Row(
       modifier = Modifier,
       verticalAlignment = Alignment.CenterVertically

@@ -16,12 +16,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.github.wenubey.finalspacewiki.R
 import com.github.wenubey.finalspacewiki.presentation.ui.theme.appBarColor
 import com.github.wenubey.finalspacewiki.presentation.ui.theme.backGroundColor
+import com.github.wenubey.finalspacewiki.presentation.ui.theme.cardBackGroundColor
 import com.github.wenubey.finalspacewiki.presentation.util.CustomAlertDialog
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -52,7 +54,7 @@ fun WikiTopBar(
           painter = painterResource(id = R.drawable.baseline_help_24),
           contentDescription = "",
           modifier = Modifier.size(30.dp),
-          tint = backGroundColor
+          tint = Color.White
         )
       }
       if (openDialog.value) {

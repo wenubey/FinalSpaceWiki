@@ -14,12 +14,14 @@ import androidx.compose.ui.unit.dp
 import com.github.wenubey.finalspacewiki.R
 import com.github.wenubey.finalspacewiki.presentation.ui.theme.appBarColor
 import com.github.wenubey.finalspacewiki.presentation.ui.theme.cardBackGroundColor
+import com.github.wenubey.finalspacewiki.presentation.ui.theme.searchBarColor
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WikiSearchBar(
   value: String,
   onValueChange: (String) -> Unit,
+  hintText: String,
 ) {
   TextField(
     modifier = Modifier
@@ -36,13 +38,13 @@ fun WikiSearchBar(
         tint = Color.White
       )
     },
-    placeholder = { Text(text = "Search location", style = MaterialTheme.typography.body1) },
+    placeholder = { Text(text = hintText, style = MaterialTheme.typography.body1) },
     textStyle = MaterialTheme.typography.body1,
     colors = TextFieldDefaults.textFieldColors(
-      containerColor = appBarColor.copy(alpha = 0.5f),
+      containerColor = searchBarColor,
       focusedIndicatorColor = Color.Transparent,
       unfocusedIndicatorColor = Color.Transparent,
-      cursorColor = cardBackGroundColor,
+
 
     )
   )

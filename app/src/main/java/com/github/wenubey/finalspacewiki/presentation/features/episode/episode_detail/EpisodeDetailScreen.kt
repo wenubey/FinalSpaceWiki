@@ -4,10 +4,12 @@ package com.github.wenubey.finalspacewiki.presentation.features.episode.episode_
 
 import android.annotation.SuppressLint
 import android.content.Context
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.github.wenubey.finalspacewiki.presentation.features.common.WikiTopBar
 import com.github.wenubey.finalspacewiki.presentation.features.episode.EpisodeViewModel
@@ -29,6 +31,8 @@ fun EpisodeDetailScreen(
   }
   val openDialog = remember { mutableStateOf(false) }
   Scaffold(
+    modifier = Modifier
+      .fillMaxSize(),
     backgroundColor = backGroundColor,
     topBar = {
       WikiTopBar(context = context, openDialog = openDialog)

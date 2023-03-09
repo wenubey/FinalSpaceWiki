@@ -41,7 +41,6 @@ fun EpisodeListCard(
     shape = RoundedCornerShape(20.dp),
     onClick = {
       navController.navigate(Screen.EpisodeDetailScreen.route + "/${data[index].id}")
-      println(Screen.EpisodeDetailScreen.route + "/${data[index].id}")
     }
   ) {
     Column(

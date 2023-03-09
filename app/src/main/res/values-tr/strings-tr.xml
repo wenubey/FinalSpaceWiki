@@ -8,10 +8,13 @@
     <string name="copyright">Yasal Haklar</string>
     <string name="how_to_use">Nasıl Kullanılır</string>
     <string name="copyright_first">Final Space Olan Rogers tarafından önce bu firma için üretildi </string>
-    <string name="tbs"> TBS </string>
+    <string name="tbs">\ TBS\ </string>
     <string name="copyright_second">ve sonrasından bu firma satın aldı </string>
-    <string name="adult_swim"> Adult Swim. </string>
+    <string name="adult_swim">\ Adult Swim.\ </string>
     <string name="copyright_third">Veriler ve resimler, sahiplik iddiası olmaksızın kullanılır ve ilgili sahiplerine aittir. Bu API\'de sağlanan herhangi bir materyalin haklarına sahip değilim.</string>
     <string name="flat_icon">Flat Icon</string>
     <string name="copyright_fourth">"Bazı ikonları aldığım site "</string>
+    <string name="copyright_fifth">" bu sitede çok havalı ikonları bulabilirsiniz."</string>
+    <string name="inhabitants">Sakinler</string>
+    <string name="notable_residents">Kayda değer sakinler</string>
 </resources>

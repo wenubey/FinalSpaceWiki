@@ -41,7 +41,8 @@ fun EpisodeList(
         WikiSearchBar(value = viewModel.searchQuery.value,
           onValueChange = {
             viewModel.onEvent(EpisodeListEvent.OnSearchQueryChange(it))
-          }
+          },
+          hintText = "Search Episode",
         )
         Spacer(modifier = Modifier.height(4.dp))
         LazyVerticalGrid(

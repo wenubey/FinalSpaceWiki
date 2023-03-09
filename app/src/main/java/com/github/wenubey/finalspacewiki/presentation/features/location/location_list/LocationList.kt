@@ -41,7 +41,8 @@ fun LocationList(
           value = viewModel.searchQuery.value,
           onValueChange = {
             viewModel.onEvent(LocationListEvent.OnSearchQueryChanged(it))
-          }
+          },
+          hintText = "Search Location",
         )
         Spacer(modifier = Modifier.height(4.dp))
         LazyVerticalGrid(

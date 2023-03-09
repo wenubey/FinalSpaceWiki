@@ -27,19 +27,17 @@ fun CharacterListCard(
     modifier: Modifier = Modifier,
     navController: NavController,
     backgroundColor: Color = cardBackGroundColor,
+    cardSizeWidth: Double = Size().width() * 0.2,
+    cardSizeHeight: Double = Size().height() * 0.2
 ) {
-    val screenSize = Size()
-    val screenHeight = screenSize.height()
-    val screenWidth = screenSize.width()
     Card(
         modifier = modifier
             .padding(8.dp)
-            .size(width = (screenWidth * 0.1).dp, height = (screenHeight * 0.18).dp),
+            .size(width = (cardSizeWidth).dp, height = (cardSizeHeight).dp),
         backgroundColor = backgroundColor,
         shape = RoundedCornerShape(20.dp),
         onClick = {
             navController.navigate(Screen.CharacterDetailScreen.route + "/${data.id}")
-            println(Screen.CharacterDetailScreen.route + "/${data.id}")
         }
     ) {
         Column(
