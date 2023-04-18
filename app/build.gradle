@@ -6,6 +6,7 @@ plugins {
 }
 
 android {
+    namespace "com.github.wenubey.finalspacewiki"
     compileSdk 33
 
     defaultConfig {
@@ -83,25 +84,25 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.3"
 
     // ViewModel compose
-    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1"
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1'
 
     // Glide
     implementation "com.github.bumptech.glide:compose:1.0.0-alpha.1"
 
     //accompanist
-    implementation "com.google.accompanist:accompanist-systemuicontroller:0.23.1"
-    implementation 'com.google.accompanist:accompanist-swiperefresh:0.29.1-alpha'
+    implementation "com.google.accompanist:accompanist-systemuicontroller:0.28.0"
+    implementation 'com.google.accompanist:accompanist-swiperefresh:0.31.0-alpha'
 
 
     // Navigation
     implementation "androidx.navigation:navigation-compose:$nav_version"
 
     // Room
-    implementation "androidx.room:room-runtime:2.5.0"
-    kapt "androidx.room:room-compiler:2.5.0"
+    implementation 'androidx.room:room-runtime:2.5.1'
+    kapt 'androidx.room:room-compiler:2.5.1'
 
     // Kotlin Extensions and Coroutines support for Room
-    implementation "androidx.room:room-ktx:2.5.0"
+    implementation 'androidx.room:room-ktx:2.5.1'
 
     implementation 'com.google.code.gson:gson:2.10.1'
 
