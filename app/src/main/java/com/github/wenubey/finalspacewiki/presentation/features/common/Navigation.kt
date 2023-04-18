@@ -15,9 +15,7 @@ import com.github.wenubey.finalspacewiki.presentation.features.location.location
 import com.github.wenubey.finalspacewiki.presentation.features.location.location_list.LocationListScreen
 
 @Composable
-fun Navigation(
-  context: Context,
-) {
+fun Navigation() {
   val navController = rememberNavController()
   NavHost(
     navController = navController,

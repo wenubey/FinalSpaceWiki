@@ -11,6 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.github.wenubey.finalspacewiki.presentation.features.character.CharacterViewModel
 import com.github.wenubey.finalspacewiki.presentation.features.common.WikiSearchBar
@@ -20,9 +21,9 @@ import com.github.wenubey.finalspacewiki.presentation.util.Size
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CharacterList(
-  navController: NavController,
-  viewModel: CharacterViewModel,
   modifier: Modifier = Modifier,
+  navController: NavController,
+  viewModel: CharacterViewModel = hiltViewModel(),
 ) {
   val screenSize = Size()
   val screenHeight = screenSize.height()

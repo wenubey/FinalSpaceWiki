@@ -18,7 +18,6 @@ import com.github.wenubey.finalspacewiki.presentation.ui.theme.backGroundColor
 @Composable
 fun CharacterListScreen(
   navController: NavController,
-  viewModel: CharacterViewModel = hiltViewModel(),
 ) {
   val openDialog = remember { mutableStateOf(false) }
   Scaffold(
@@ -31,7 +30,6 @@ fun CharacterListScreen(
     content = { paddingValues ->
         CharacterList(
           navController = navController,
-          viewModel = viewModel,
           modifier = Modifier.padding(paddingValues)
         )
     },

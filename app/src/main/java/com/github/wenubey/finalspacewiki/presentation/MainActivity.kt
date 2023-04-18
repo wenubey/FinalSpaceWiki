@@ -15,28 +15,10 @@ class MainActivity : ComponentActivity() {
     super.onCreate(savedInstanceState)
     setContent {
       FinalSpaceWikiTheme {
-        Navigation(
-          context = applicationContext
-        )
+        Navigation()
       }
     }
   }
-
-//    fun Context.setAppLocale(language: String): Context {
-//        val locale = Locale(language)
-//        Locale.setDefault(locale)
-//        val config = resources.configuration
-//        config.setLocale(locale)
-//        config.setLayoutDirection(locale)
-//        return createConfigurationContext(config)
-//    }
-//
-//
-//    override fun attachBaseContext(newBase: Context?) {
-//        if (newBase != null) {
-//            super.attachBaseContext(ContextWrapper(newBase.setAppLocale("tr")))
-//        }
-//    }
 
 }
 
