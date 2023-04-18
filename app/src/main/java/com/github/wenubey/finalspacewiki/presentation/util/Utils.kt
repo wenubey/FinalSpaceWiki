@@ -1,16 +1,8 @@
 package com.github.wenubey.finalspacewiki.presentation.util
 
-import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.unit.sp
 import com.github.wenubey.finalspacewiki.R
-import com.github.wenubey.finalspacewiki.presentation.ui.theme.cardBackGroundColor
-import kotlin.random.Random
 
 fun checkGender(gender: String): Int {
   return if (gender.contains("Male")) {
@@ -33,31 +25,6 @@ class Size {
   fun width(): Int {
     val configuration = LocalConfiguration.current
     return configuration.screenWidthDp
-  }
-}
-
-fun createCopyRightString(context: Context): AnnotatedString {
-  return buildAnnotatedString {
-    append(context.getString(R.string.copyright_first))
-    pushStringAnnotation(tag = "TBS", annotation = "https://www.international.tbs.com")
-    withStyle(style = SpanStyle(color = cardBackGroundColor, fontSize = 20.sp)) {
-      append(context.getString(R.string.tbs))
-    }
-    pop()
-    append(context.getString(R.string.copyright_second))
-    pushStringAnnotation(tag = "ADULT_SWIM", annotation = "https://www.adultswim.com")
-    withStyle(style = SpanStyle(color = cardBackGroundColor, fontSize = 20.sp)) {
-      append(context.getString(R.string.adult_swim))
-    }
-    pop()
-    append(context.getString(R.string.copyright_third))
-    append(context.getString(R.string.copyright_fourth))
-    pushStringAnnotation("FLAT_ICON", annotation = "https://www.flaticon.com")
-    withStyle(style = SpanStyle(color = cardBackGroundColor, fontSize = 20.sp)) {
-      append(context.getString(R.string.flat_icon))
-    }
-    pop()
-    append(context.getString(R.string.copyright_fifth))
   }
 }
 

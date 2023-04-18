@@ -82,7 +82,7 @@ fun CharacterDetailCard(
                         .size(width = 200.dp, height = 200.dp),
                 )
                 Column(
-                    horizontalAlignment = Alignment.CenterHorizontally
+                    horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Text(
                         text = stringResource(R.string.species),

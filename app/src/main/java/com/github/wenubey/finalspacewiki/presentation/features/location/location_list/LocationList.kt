@@ -22,6 +22,7 @@ import com.github.wenubey.finalspacewiki.presentation.util.Size
 fun LocationList(
   navController: NavController,
   viewModel: LocationViewModel,
+  modifier: Modifier = Modifier
 ) {
   val screenSize = Size()
   val screenHeight = screenSize.height()
@@ -31,7 +32,7 @@ fun LocationList(
     onRefresh = { viewModel.onEvent(LocationListEvent.Refresh) }
   )
   viewModel.locationListDataState.locations?.let { data ->
-    Box(modifier = Modifier.pullRefresh(pullRefreshState)) {
+    Box(modifier = modifier.pullRefresh(pullRefreshState)) {
       Column(
         modifier = Modifier
           .padding(8.dp)

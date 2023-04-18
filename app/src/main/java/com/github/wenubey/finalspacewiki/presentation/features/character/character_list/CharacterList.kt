@@ -22,6 +22,7 @@ import com.github.wenubey.finalspacewiki.presentation.util.Size
 fun CharacterList(
   navController: NavController,
   viewModel: CharacterViewModel,
+  modifier: Modifier = Modifier,
 ) {
   val screenSize = Size()
   val screenHeight = screenSize.height()
@@ -33,7 +34,7 @@ fun CharacterList(
     }
   )
   viewModel.characterListDataState.characters.let { data ->
-    Box(modifier = Modifier.pullRefresh(pullRefreshState)) {
+    Box(modifier = modifier.pullRefresh(pullRefreshState)) {
       Column(
         modifier = Modifier
           .padding(8.dp)

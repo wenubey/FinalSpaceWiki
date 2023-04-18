@@ -7,27 +7,15 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.github.wenubey.finalspacewiki.presentation.features.character.CharacterViewModel
 import com.github.wenubey.finalspacewiki.presentation.features.character.character_detail.CharacterDetailScreen
-import com.github.wenubey.finalspacewiki.presentation.features.character.character_list.CharacterListDataState
 import com.github.wenubey.finalspacewiki.presentation.features.character.character_list.CharacterListScreen
-import com.github.wenubey.finalspacewiki.presentation.features.episode.EpisodeViewModel
 import com.github.wenubey.finalspacewiki.presentation.features.episode.episode_detail.EpisodeDetailScreen
-import com.github.wenubey.finalspacewiki.presentation.features.episode.episode_list.EpisodeListDataState
 import com.github.wenubey.finalspacewiki.presentation.features.episode.episode_list.EpisodeListScreen
-import com.github.wenubey.finalspacewiki.presentation.features.location.LocationViewModel
 import com.github.wenubey.finalspacewiki.presentation.features.location.location_detail.LocationDetailScreen
-import com.github.wenubey.finalspacewiki.presentation.features.location.location_list.LocationListDataState
 import com.github.wenubey.finalspacewiki.presentation.features.location.location_list.LocationListScreen
 
 @Composable
 fun Navigation(
-  characterListDataState: CharacterListDataState,
-  locationListDataState: LocationListDataState,
-  episodeListDataState: EpisodeListDataState,
-  characterViewModel: CharacterViewModel,
-  locationViewModel: LocationViewModel,
-  episodeViewModel: EpisodeViewModel,
   context: Context,
 ) {
   val navController = rememberNavController()
@@ -40,8 +28,6 @@ fun Navigation(
     ) {
       CharacterListScreen(
         navController = navController,
-        viewModel = characterViewModel,
-        context = context
       )
     }
     composable(
@@ -55,18 +41,14 @@ fun Navigation(
       )
     ) {
       CharacterDetailScreen(
-        viewModel = characterViewModel,
         id = it.arguments?.getInt("id-char"),
-        context = context,
       )
     }
     composable(
       route = Screen.LocationListScreen.route
     ) {
       LocationListScreen(
-        context = context,
         navController = navController,
-        viewModel = locationViewModel,
       )
     }
     composable(
@@ -79,8 +61,6 @@ fun Navigation(
       )
     ) {
       LocationDetailScreen(
-        viewModel = locationViewModel,
-        context = context,
         id = it.arguments?.getInt("id-location"),
         navController = navController,
       )
@@ -89,9 +69,7 @@ fun Navigation(
       route = Screen.EpisodeListScreen.route
     ) {
       EpisodeListScreen(
-        context = context,
         navController = navController,
-        viewModel = episodeViewModel,
       )
     }
     composable(
@@ -104,8 +82,6 @@ fun Navigation(
       )
     ) {
       EpisodeDetailScreen(
-        viewModel = episodeViewModel,
-        context = context,
         id = it.arguments?.getInt("id-episode"),
         navController = navController
       )

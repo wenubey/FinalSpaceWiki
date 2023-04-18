@@ -1,6 +1,5 @@
 package com.github.wenubey.finalspacewiki.presentation.features.common
 
-import android.content.Context
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -22,14 +21,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.github.wenubey.finalspacewiki.R
 import com.github.wenubey.finalspacewiki.presentation.ui.theme.appBarColor
-import com.github.wenubey.finalspacewiki.presentation.ui.theme.backGroundColor
-import com.github.wenubey.finalspacewiki.presentation.ui.theme.cardBackGroundColor
-import com.github.wenubey.finalspacewiki.presentation.util.CustomAlertDialog
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WikiTopBar(
-  context: Context,
   openDialog: MutableState<Boolean>
 ) {
   CenterAlignedTopAppBar(
@@ -58,7 +53,7 @@ fun WikiTopBar(
         )
       }
       if (openDialog.value) {
-        CustomAlertDialog(context = context, openDialog = openDialog)
+        CustomAlertDialog(openDialog = openDialog)
       }
     }
   )

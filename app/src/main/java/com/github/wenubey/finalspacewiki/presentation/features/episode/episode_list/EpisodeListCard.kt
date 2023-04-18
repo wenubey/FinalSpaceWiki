@@ -51,7 +51,7 @@ fun EpisodeListCard(
     ) {
       GlideImage(
         model = data[index].img_url,
-        contentScale = ContentScale.Fit,
+        contentScale = ContentScale.FillBounds,
         contentDescription = data[index].name,
         modifier = Modifier
           .size(height = (screenHeight *0.23).dp, width = screenWidth.dp)
